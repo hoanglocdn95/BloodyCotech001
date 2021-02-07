@@ -16,6 +16,8 @@
     "@babel/preset-env": "^7.10.4",
     "@react-native-community/checkbox": "^0.5.7",
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-firebase/admob": "^10.6.4",
+    "@react-native-firebase/app": "^10.6.4",
     "@react-navigation/bottom-tabs": "^5.6.1",
     "@react-navigation/native": "^5.1.6",
     "@react-navigation/stack": "^5.3.9",

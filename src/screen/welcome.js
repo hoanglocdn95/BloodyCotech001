@@ -41,7 +41,7 @@ export default function WelcomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={[styles.styleTitle, styles.title1]}>Happy</Text>
+        <Text style={[styles.styleTitle, styles.title1]}>Learn</Text>
         <Text style={[styles.styleTitle, styles.title2]}>Math</Text>
       </View>
       <WorkingSection firstParameter={1} secondParameter={1} result={3} />

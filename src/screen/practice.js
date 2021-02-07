@@ -97,6 +97,7 @@ const PracticeScreen = observer(() => {
             timeLabels={{ s: '' }}
             digitStyle={styles.digitStyle}
             digitTxtStyle={styles.digitTextStyle}
+            running={!isShowModal}
           />
         )}
         <View style={styles.body}>
