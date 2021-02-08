@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "147426796042",
+    "project_id": "bloodycotech001",
+    "storage_bucket": "bloodycotech001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:147426796042:android:6679897b9845554fe035f3",
+        "android_client_info": {
+          "package_name": "com.bloodycotech001"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "147426796042-8om2ktma56eurj01f8vmlee700u23jis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF1DUQVZkLDpNITdfmUmtpbK7RWWTxX98"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "147426796042-8om2ktma56eurj01f8vmlee700u23jis.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

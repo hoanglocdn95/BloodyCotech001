@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-native';
-import {
+import admob, {
   InterstitialAd,
   AdEventType,
   TestIds,
+  MaxAdContentRating,
 } from '@react-native-firebase/admob';
 
 const adUnitId = __DEV__

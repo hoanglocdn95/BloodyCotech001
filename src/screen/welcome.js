@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
+import admob, { MaxAdContentRating } from '@react-native-firebase/admob';
 
 import {
   colors,
@@ -31,6 +32,19 @@ export default function WelcomeScreen() {
 
   useFocusEffect(
     React.useCallback(() => {
+      admob()
+        .setRequestConfiguration({
+          maxAdContentRating: MaxAdContentRating.PG,
+          tagForChildDirectedTreatment: true,
+          tagForUnderAgeOfConsent: true,
+        })
+        .then(result => {
+          // Request config successfully set!
+          console.log('.then => result', result);
+        })
+        .catch(error => {
+          console.log('.catch => error', result);
+        });
       setIsShowOption(false);
       this.animation.play();
       PracticeStore.reset();
