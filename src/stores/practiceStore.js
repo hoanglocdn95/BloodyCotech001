@@ -42,16 +42,16 @@ class PracticeStore {
     this.secondParameter = item;
   }
 
-  @action setPoint(item) {
-    this.point = item;
+  @action setPoint(point) {
+    this.point = point;
   }
 
   @action setPLayTime(time) {
     this.playTime = time;
   }
 
-  @action setThresholdPoint(time) {
-    this.thresholdPoint = time;
+  @action setThresholdPoint(thresholdPoint) {
+    this.thresholdPoint = thresholdPoint;
   }
 
   @action reset() {
