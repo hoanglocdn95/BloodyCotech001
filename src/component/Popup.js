@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TouchableHighlight, Text } from 'react-native';
-import { colors, fonts, spaces, borderRadius } from '../constants/theme';
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet, TouchableHighlight, Text} from 'react-native';
+import {colors, fonts, spaces, borderRadius} from '../constants/theme';
 import Modal from 'react-native-modal';
 
 const Popup = props => {
-  const { isShowPopup, handleClosePopup, handleYesButton, content } = props;
+  const {
+    isShowPopup,
+    handleClosePopup,
+    handleYesButton,
+    handleNoButton,
+    content,
+  } = props;
   const [isShowModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -14,6 +20,11 @@ const Popup = props => {
   const onPressYesButton = () => {
     handleClosePopup(false);
     handleYesButton();
+  };
+
+  const onPressNoButton = () => {
+    handleClosePopup(false);
+    handleNoButton();
   };
 
   return (
@@ -36,7 +47,7 @@ const Popup = props => {
           </TouchableHighlight>
           <TouchableHighlight
             style={[styles.buttonFooter, styles.buttonRight]}
-            onPress={() => handleClosePopup(false)}>
+            onPress={() => onPressNoButton()}>
             <Text style={styles.textStyle}>Không</Text>
           </TouchableHighlight>
         </View>
