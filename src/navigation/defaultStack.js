@@ -5,6 +5,7 @@ import Success from '../screen/success';
 import WelcomeScreen from '../screen/welcome';
 import Battle from '../screen/battle';
 import ChooseTime from '../screen/chooseTime';
+import SplashScreen from '../screen/splash';
 import { StackRoute } from '../constants/route';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -12,7 +13,13 @@ const Stack = createStackNavigator();
 
 const DefaultStack = () => {
   return (
-    <Stack.Navigator initialRouteName={StackRoute.Main.Welcome}>
+    <Stack.Navigator initialRouteName={StackRoute.Main.Splash}>
+      <Stack.Screen
+        name={StackRoute.Main.Splash}
+        component={SplashScreen}
+        options={{ headerShown: false }}
+        backBehavior="none"
+      />
       <Stack.Screen
         name={StackRoute.Main.Welcome}
         component={WelcomeScreen}

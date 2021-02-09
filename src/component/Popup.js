@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, TouchableHighlight, Text} from 'react-native';
-import {colors, fonts, spaces, borderRadius} from '../constants/theme';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, TouchableHighlight, Text } from 'react-native';
+import { colors, fonts, spaces, borderRadius } from '../constants/theme';
 import Modal from 'react-native-modal';
 
 const Popup = props => {

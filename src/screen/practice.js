@@ -1,11 +1,11 @@
-import {observer} from 'mobx-react-lite';
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Dimensions, Button} from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
+import { observer } from 'mobx-react-lite';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Dimensions, Button } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
-import {colors, fonts, spaces} from '../constants/theme';
-import {useNavigation} from '@react-navigation/native';
-import {StackRoute} from '../constants/route';
+import { colors, fonts, spaces } from '../constants/theme';
+import { useNavigation } from '@react-navigation/native';
+import { StackRoute } from '../constants/route';
 
 import WorkingSection from '../component/WorkingSection';
 import AnswerButton from '../component/AnswerButton';
@@ -94,7 +94,7 @@ const PracticeScreen = observer(() => {
             onFinish={() => Navigate.navigate(StackRoute.Main.Failed)}
             size={spaces.space4}
             timeToShow={['S']}
-            timeLabels={{s: ''}}
+            timeLabels={{ s: '' }}
             digitStyle={styles.digitStyle}
             digitTxtStyle={styles.digitTextStyle}
             running={!isShowModal}

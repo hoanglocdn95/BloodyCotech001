@@ -4,3 +4,6 @@ export const WrongIcon = require('./icons8-cross-mark-96.png');
 export const WarningIcon = require('./icons8-exclamation-mark-96.png');
 export const HomeIcon = require('./icons8-home-384.png');
 export const ResetIcon = require('./icons8-available-updates-100.png');
+export const LogoBrandDark = require('./logo_size_invert.jpg');
+export const LogoBrandLight = require('./logo_size.jpg');
+export const LogoBrand = require('./logo_brand.png');
