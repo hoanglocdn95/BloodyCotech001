@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
-import admob, { MaxAdContentRating } from '@react-native-firebase/admob';
 
 import {
   colors,
@@ -25,26 +24,15 @@ import { PlayIcon } from '../assets/icons/index';
 import { StackRoute } from '../constants/route';
 import WorkingSection from '../component/WorkingSection';
 import { AnimationRocket } from '../assets/animations/index';
+import { useTranslation } from 'react-i18next';
 
 export default function WelcomeScreen() {
+  const { t } = useTranslation();
   const Navigate = useNavigation();
   const [isShowOption, setIsShowOption] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
-      admob()
-        .setRequestConfiguration({
-          maxAdContentRating: MaxAdContentRating.PG,
-          tagForChildDirectedTreatment: true,
-          tagForUnderAgeOfConsent: true,
-        })
-        .then(result => {
-          // Request config successfully set!
-          console.log('.then => result', result);
-        })
-        .catch(error => {
-          console.log('.catch => error', result);
-        });
       setIsShowOption(false);
       this.animation.play();
       PracticeStore.reset();
@@ -55,8 +43,12 @@ export default function WelcomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={[styles.styleTitle, styles.title1]}>Learn</Text>
-        <Text style={[styles.styleTitle, styles.title2]}>Math</Text>
+        <Text style={[styles.styleTitle, styles.title1]}>
+          {t('welcome.title1')}
+        </Text>
+        <Text style={[styles.styleTitle, styles.title2]}>
+          {t('welcome.title2')}
+        </Text>
       </View>
       <WorkingSection firstParameter={1} secondParameter={1} result={3} />
       <LottieView
@@ -72,12 +64,16 @@ export default function WelcomeScreen() {
           <TouchableHighlight
             style={styles.imageContainer}
             onPress={() => Navigate.navigate(StackRoute.Main.ChooseTime)}>
-            <Text style={[styles.styleTitle, styles.selectText]}>practice</Text>
+            <Text style={[styles.styleTitle, styles.selectText]}>
+              {t('welcome.practice')}
+            </Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.imageContainer}
             onPress={() => Navigate.navigate(StackRoute.Main.Battle)}>
-            <Text style={[styles.styleTitle, styles.selectText]}>battle</Text>
+            <Text style={[styles.styleTitle, styles.selectText]}>
+              {t('welcome.battle')}
+            </Text>
           </TouchableHighlight>
         </View>
       ) : (
