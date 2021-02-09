@@ -5,6 +5,7 @@ export const StackRoute = {
     Rate: 'Rate',
   },
   Main: {
+    Splash: 'Splash',
     Welcome: 'Welcome',
     Practice: 'Practice',
     Learn: 'Learn',

@@ -26,6 +26,7 @@ export const colors = {
   white_milk: '#f4f4f4',
   black: '#2f2519',
   black_light: '#4a3f35',
+  black_transparent: 'rgba(0,0,0,0.3)',
 };
 
 export const spaces = {
