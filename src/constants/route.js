@@ -3,6 +3,7 @@ export const StackRoute = {
     Achievements: 'Achievements',
     Rank: 'Rank',
     Rate: 'Rate',
+    Setting: 'Setting',
   },
   Main: {
     Splash: 'Splash',

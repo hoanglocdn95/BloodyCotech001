@@ -1,24 +1,23 @@
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Dimensions, Button } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
-import { colors, fonts, spaces } from '../constants/theme';
+import { colors, fonts, spaces } from 'constants/theme';
 import { useNavigation } from '@react-navigation/native';
-import { StackRoute } from '../constants/route';
+import { StackRoute } from 'constants/route';
+import { ThresholdPeek } from 'constants/common';
 
-import WorkingSection from '../component/WorkingSection';
-import AnswerButton from '../component/AnswerButton';
-import PointSection from '../component/PointSection';
-import Popup from '../component/Popup';
+import WorkingSection from 'component/WorkingSection';
+import AnswerButton from 'component/AnswerButton';
+import PointSection from 'component/PointSection';
+import Popup from 'component/Popup';
 
-import PracticeStore from '../stores/practiceStore';
-import CounterStore from '../stores/counterStore';
+import PracticeStore from 'stores/practiceStore';
+import CounterStore from 'stores/counterStore';
 import CountDown from 'react-native-countdown-component';
 
 const windowWidth = Dimensions.get('window').width;
-
-const kPointThreshold = 2;
 
 const PracticeScreen = observer(() => {
   const Navigate = useNavigation();
@@ -34,7 +33,7 @@ const PracticeScreen = observer(() => {
   useEffect(() => {
     PracticeStore.setFirstParameter(randomNumber(1, 9));
     PracticeStore.setSecondParameter(randomNumber(1, 9));
-    PracticeStore.setThresholdPoint(PracticeStore.Point + kPointThreshold);
+    PracticeStore.setThresholdPoint(PracticeStore.Point + ThresholdPeek);
     setResult(PracticeStore.calculateResult());
   }, []);
 
@@ -75,7 +74,7 @@ const PracticeScreen = observer(() => {
   };
 
   const handleIgnoreChangeLevel = () => {
-    PracticeStore.setThresholdPoint(PracticeStore.Point + kPointThreshold);
+    PracticeStore.setThresholdPoint(PracticeStore.Point + ThresholdPeek);
   };
 
   return (
@@ -114,7 +113,7 @@ const PracticeScreen = observer(() => {
       </View>
       <Popup
         isShowPopup={isShowModal}
-        handleClosePopup={setShowModal}
+        handleClosePopup={isShow => setShowModal(isShow)}
         handleYesButton={handleChangeLevel}
         handleNoButton={handleIgnoreChangeLevel}
         content={

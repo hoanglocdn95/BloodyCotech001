@@ -5,6 +5,13 @@ const English = {
     practice: 'practice',
     battle: 'battle',
   },
+  battle: {},
+  practice: {},
+  settings: {
+    language: {
+      title: 'Choose your language',
+    },
+  },
 };
 
 export default English;

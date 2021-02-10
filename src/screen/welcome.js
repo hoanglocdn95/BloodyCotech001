@@ -16,14 +16,14 @@ import {
   spaces,
   borderRadius,
   borderWidth,
-} from '../constants/theme';
+} from 'constants/theme';
 
-import PracticeStore from '../stores/practiceStore';
-import CounterStore from '../stores/counterStore';
-import { PlayIcon } from '../assets/icons/index';
-import { StackRoute } from '../constants/route';
-import WorkingSection from '../component/WorkingSection';
-import { AnimationRocket } from '../assets/animations/index';
+import PracticeStore from 'stores/practiceStore';
+import CounterStore from 'stores/counterStore';
+import { PlayIcon } from 'assets/icons/index';
+import { StackRoute } from 'constants/route';
+import WorkingSection from 'component/WorkingSection';
+import { AnimationRocket } from 'assets/animations/index';
 import { useTranslation } from 'react-i18next';
 
 export default function WelcomeScreen() {
@@ -83,6 +83,11 @@ export default function WelcomeScreen() {
           <Image source={PlayIcon} />
         </TouchableHighlight>
       )}
+      <TouchableHighlight
+        style={styles.imageContainer}
+        onPress={() => Navigate.navigate(StackRoute.BottomTabs.Setting)}>
+        <Text style={[styles.styleTitle, styles.selectText]}>Setting</Text>
+      </TouchableHighlight>
     </View>
   );
 }

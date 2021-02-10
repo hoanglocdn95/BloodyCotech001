@@ -1,15 +1,15 @@
-import {observer} from 'mobx-react-lite';
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Dimensions} from 'react-native';
+import { observer } from 'mobx-react-lite';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Dimensions } from 'react-native';
 
-import {colors} from '../constants/theme';
-import {useNavigation} from '@react-navigation/native';
-import {StackRoute} from '../constants/route';
+import { colors } from 'constants/theme';
+import { useNavigation } from '@react-navigation/native';
+import { StackRoute } from 'constants/route';
 
-import WorkingSection from '../component/WorkingSection';
-import AnswerButton from '../component/AnswerButton';
-import PointSection from '../component/PointSection';
-import BattleStore from '../stores/battleStore';
+import WorkingSection from 'component/WorkingSection';
+import AnswerButton from 'component/AnswerButton';
+import PointSection from 'component/PointSection';
+import BattleStore from 'stores/battleStore';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   player1: {
     flex: 1,
-    transform: [{rotate: '180deg'}],
+    transform: [{ rotate: '180deg' }],
     justifyContent: 'space-between',
     borderTopWidth: 1,
     borderColor: 'white',

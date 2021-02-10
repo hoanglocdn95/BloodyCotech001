@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableHighlight, Text } from 'react-native';
-import { colors, fonts, spaces, borderRadius } from '../constants/theme';
+import { colors, fonts, spaces, borderRadius } from 'constants/theme';
 import Modal from 'react-native-modal';
 
 const Popup = props => {
@@ -34,7 +34,7 @@ const Popup = props => {
       animationIn="slideInUp"
       animationOut="slideOutDown"
       backdropOpacity={0.5}
-      onModalHide={handleClosePopup}>
+      onModalHide={() => handleClosePopup(false)}>
       <View style={styles.container}>
         <View style={styles.body}>
           <Text style={styles.bodyText}>{content}</Text>

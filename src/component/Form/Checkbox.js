@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 
-import { fonts, colors, spaces, borderRadius } from '../../constants/theme';
+import { fonts, colors, spaces, borderRadius } from 'constants/theme';
 
 const Checkbox = props => {
   const { handleCheckValue, label, value, valueSelected, isDisabled } = props;

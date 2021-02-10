@@ -1,6 +1,12 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableHighlight, Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableHighlight,
+  Image,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   colors,
@@ -8,12 +14,12 @@ import {
   spaces,
   borderRadius,
   borderWidth,
-} from '../constants/theme';
-import WorkingSection from '../component/WorkingSection';
+} from 'constants/theme';
+import WorkingSection from 'component/WorkingSection';
 
-import {PlayIcon} from '../assets/icons/index';
-import {StackRoute} from '../constants/route';
-import PracticeStore from '../stores/practiceStore';
+import { PlayIcon } from 'assets/icons/index';
+import { StackRoute } from 'constants/route';
+import PracticeStore from 'stores/practiceStore';
 
 export default function FailedScreen() {
   const Navigate = useNavigation();

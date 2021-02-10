@@ -1,6 +1,12 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableHighlight, Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableHighlight,
+  Image,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   colors,
@@ -8,11 +14,11 @@ import {
   spaces,
   borderRadius,
   borderWidth,
-} from '../constants/theme';
+} from 'constants/theme';
 
-import {PlayIcon} from '../assets/icons/index';
-import {StackRoute} from '../constants/route';
-import BattleStore from '../stores/battleStore';
+import { PlayIcon } from 'assets/icons/index';
+import { StackRoute } from 'constants/route';
+import BattleStore from 'stores/battleStore';
 
 export default function SuccessScreen() {
   const [isShowOption, setIsShowOption] = useState(false);
@@ -28,8 +34,8 @@ export default function SuccessScreen() {
   };
   const chooseColor = () => {
     return BattleStore.player1.point > BattleStore.player2.point
-      ? {color: 'green'}
-      : {color: 'red'};
+      ? { color: 'green' }
+      : { color: 'red' };
   };
   return (
     <View style={styles.container}>
