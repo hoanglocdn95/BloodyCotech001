@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { Image, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { HomeIcon, ResetIcon } from '../assets/icons/index';
+import { HomeIcon, ResetIcon } from 'assets/icons/index';
 import { useNavigation } from '@react-navigation/native';
-import { spaces, widthComponent } from '../constants/theme';
-import { StackRoute } from '../constants/route';
+import { spaces, widthComponent } from 'constants/theme';
+import { StackRoute } from 'constants/route';
 
 const PointSection = props => {
   const Navigate = useNavigation();

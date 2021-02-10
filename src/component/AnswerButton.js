@@ -6,8 +6,8 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { RightIcon, WrongIcon } from '../assets/icons/index';
-import { colors, spaces, borderWidth } from '../constants/theme';
+import { RightIcon, WrongIcon } from 'assets/icons/index';
+import { colors, spaces, borderWidth } from 'constants/theme';
 const windowWidth = Dimensions.get('window').width;
 
 const AnswerButton = props => {

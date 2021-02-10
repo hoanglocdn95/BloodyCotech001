@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {useFocusEffect} from '@react-navigation/native';
-import {View, StyleSheet, Text, Animated} from 'react-native';
-import {colors, fonts, spaces} from '../constants/theme';
+import { useFocusEffect } from '@react-navigation/native';
+import { View, StyleSheet, Text, Animated } from 'react-native';
+import { colors, fonts, spaces } from 'constants/theme';
 
 const WorkingSection = props => {
-  const {firstParameter, secondParameter, result, isCorrect} = props;
+  const { firstParameter, secondParameter, result, isCorrect } = props;
   const fadeAnim = new Animated.Value(0);
   const rotateY360deg = new Animated.Value(0);
 
@@ -44,7 +44,7 @@ const WorkingSection = props => {
         style={[
           {
             opacity: fadeAnim,
-            transform: [{rotateY: rotateY360deg}],
+            transform: [{ rotateY: rotateY360deg }],
           },
         ]}>
         <Text style={styles.questionMark}>{isCorrect ? '!' : '?'}</Text>

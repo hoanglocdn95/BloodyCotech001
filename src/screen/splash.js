@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { colors } from '../constants/theme';
-import { StackRoute } from '../constants/route';
-import { LogoBrand } from '../assets/icons/index';
+import { colors } from 'constants/theme';
+import { StackRoute } from 'constants/route';
+import { LogoBrand } from 'assets/icons/index';
 
 export default function SplashScreen() {
   const Navigate = useNavigation();
+
   useEffect(() => {
     setTimeout(() => Navigate.navigate(StackRoute.Main.Welcome), 3000);
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
