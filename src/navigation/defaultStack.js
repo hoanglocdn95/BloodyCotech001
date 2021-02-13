@@ -8,55 +8,52 @@ import ChooseTime from 'screen/chooseTime';
 import SplashScreen from 'screen/splash';
 import { SetLanguageScreen } from 'screen/settings/index';
 import { StackRoute } from 'constants/route';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
 const DefaultStack = () => {
+  const config = {
+    animation: 'spring',
+    config: {
+      stiffness: 1000,
+      damping: 500,
+      mass: 3,
+      overshootClamping: true,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
+    },
+  };
   return (
-    <Stack.Navigator initialRouteName={StackRoute.Main.Splash}>
+    <Stack.Navigator
+      initialRouteName={StackRoute.Main.Splash}
+      screenOptions={({ route, navigation }) => ({
+        headerShown: false,
+        gestureEnabled: true,
+        cardOverlayEnabled: false,
+      })}>
       <Stack.Screen
         name={StackRoute.Main.Splash}
         component={SplashScreen}
-        options={{ headerShown: false }}
         backBehavior="none"
       />
       <Stack.Screen
         name={StackRoute.Main.Welcome}
         component={WelcomeScreen}
-        options={{ headerShown: false }}
         backBehavior="none"
       />
-      <Stack.Screen
-        name={StackRoute.Main.Practice}
-        component={Practice}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={StackRoute.Main.Failed}
-        component={Failed}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={StackRoute.Main.Battle}
-        component={Battle}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={StackRoute.Main.Success}
-        component={Success}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={StackRoute.Main.ChooseTime}
-        component={ChooseTime}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name={StackRoute.Main.Practice} component={Practice} />
+      <Stack.Screen name={StackRoute.Main.Failed} component={Failed} />
+      <Stack.Screen name={StackRoute.Main.Battle} component={Battle} />
+      <Stack.Screen name={StackRoute.Main.Success} component={Success} />
+      <Stack.Screen name={StackRoute.Main.ChooseTime} component={ChooseTime} />
 
       <Stack.Screen
         name={StackRoute.BottomTabs.Setting}
         component={SetLanguageScreen}
-        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

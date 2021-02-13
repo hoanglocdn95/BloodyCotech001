@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 
 import { colors } from 'constants/theme';
+import { Right, Wrong } from 'constants/common';
 import { useNavigation } from '@react-navigation/native';
 import { StackRoute } from 'constants/route';
 
@@ -33,14 +34,14 @@ const BattleScreen = observer(() => {
     BattleStore.setFirstParameter(randomNumber(1, 9));
     BattleStore.setSecondParameter(randomNumber(1, 9));
     setResult(BattleStore.calculateResult());
-    if ((type === 'wrong' && isTrue) || (type === 'right' && !isTrue)) {
+    if ((type === Wrong && isTrue) || (type === Right && !isTrue)) {
       const point = BattleStore[`player${player}`].point - 1;
       BattleStore.setPoint(point, player);
       if (point <= -5) {
         return Navigate.navigate(StackRoute.Main.Success);
       }
     }
-    if ((type === 'wrong' && !isTrue) || (type === 'right' && isTrue)) {
+    if ((type === Wrong && !isTrue) || (type === Right && isTrue)) {
       const point = BattleStore[`player${player}`].point + 1;
       BattleStore.setPoint(point, player);
       if (point >= 10) {
@@ -61,8 +62,8 @@ const BattleScreen = observer(() => {
           />
         </View>
         <AnswerButton
-          onRightAnswer={() => pressAnswer('right', 1)}
-          onWrongAnswer={() => pressAnswer('wrong', 1)}
+          onRightAnswer={() => pressAnswer(Right, 1)}
+          onWrongAnswer={() => pressAnswer(Wrong, 1)}
         />
       </View>
       <View style={styles.player2}>
@@ -75,8 +76,8 @@ const BattleScreen = observer(() => {
           />
         </View>
         <AnswerButton
-          onRightAnswer={() => pressAnswer('right', 2)}
-          onWrongAnswer={() => pressAnswer('wrong', 2)}
+          onRightAnswer={() => pressAnswer(Right, 2)}
+          onWrongAnswer={() => pressAnswer(Wrong, 2)}
         />
       </View>
     </View>
