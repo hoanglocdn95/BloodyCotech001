@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableHighlight, Text } from 'react-native';
 import { colors, fonts, spaces, borderRadius } from 'constants/theme';
 import Modal from 'react-native-modal';
+import { useTranslation } from 'react-i18next';
 
 const Popup = props => {
   const {
@@ -11,6 +12,7 @@ const Popup = props => {
     handleNoButton,
     content,
   } = props;
+  const { t } = useTranslation();
   const [isShowModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -43,12 +45,12 @@ const Popup = props => {
           <TouchableHighlight
             style={[styles.buttonFooter, styles.buttonLeft]}
             onPress={() => onPressYesButton()}>
-            <Text style={styles.textStyle}>Có</Text>
+            <Text style={styles.textStyle}>{t('component.button.yes')}</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={[styles.buttonFooter, styles.buttonRight]}
             onPress={() => onPressNoButton()}>
-            <Text style={styles.textStyle}>Không</Text>
+            <Text style={styles.textStyle}>{t('component.button.no')}</Text>
           </TouchableHighlight>
         </View>
       </View>

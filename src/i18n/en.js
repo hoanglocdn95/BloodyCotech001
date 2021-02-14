@@ -5,11 +5,29 @@ const English = {
     practice: 'practice',
     battle: 'battle',
   },
-  battle: {},
-  practice: {},
+  chooseTime: {
+    chooseYourTime: 'Choose your play time!',
+    second: 'second',
+  },
+  failed: {
+    point: 'Point: ',
+  },
+  success: {
+    winner: 'Winner',
+    player: 'Player',
+  },
   settings: {
     language: {
       title: 'Choose your language',
+    },
+  },
+  component: {
+    pointSection: {
+      point: 'Point',
+    },
+    button: {
+      yes: 'Yes',
+      no: 'No',
     },
   },
 };

@@ -14,8 +14,10 @@ import { StackRoute } from 'constants/route';
 import { PlayIcon } from 'assets/icons/index';
 import PracticeStore from 'stores/practiceStore';
 import Checkbox from 'component/Form/Checkbox';
+import { useTranslation } from 'react-i18next';
 
 const ChooseTimeScreen = observer(() => {
+  const { t } = useTranslation();
   const Navigate = useNavigation();
 
   const renderListCheckbox = () => {
@@ -28,7 +30,7 @@ const ChooseTimeScreen = observer(() => {
           label={
             item.time === 0
               ? `${item.description}`
-              : `${item.time} giây (${item.description})`
+              : `${item.time} ${t('chooseTime.second')} (${item.description})`
           }
           valueSelected={PracticeStore.PlayTime}
         />
@@ -38,7 +40,7 @@ const ChooseTimeScreen = observer(() => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.styleTitle}>Chọn thời gian chơi</Text>
+      <Text style={styles.styleTitle}>{t('chooseTime.chooseYourTime')}</Text>
       <View style={styles.containerList}>{renderListCheckbox()}</View>
       <TouchableHighlight
         style={styles.imageContainer}

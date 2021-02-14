@@ -6,7 +6,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { colors, fonts, spaces } from 'constants/theme';
 import { useNavigation } from '@react-navigation/native';
 import { StackRoute } from 'constants/route';
-import { ThresholdPeek } from 'constants/common';
+import { ThresholdPeek, Right, Wrong } from 'constants/common';
 
 import WorkingSection from 'component/WorkingSection';
 import AnswerButton from 'component/AnswerButton';
@@ -48,11 +48,11 @@ const PracticeScreen = observer(() => {
       PracticeStore.FirstParameter + PracticeStore.SecondParameter === result;
     CounterStore.reset();
 
-    if ((type === 'wrong' && isTrue) || (type === 'right' && !isTrue)) {
+    if ((type === Wrong && isTrue) || (type === Right && !isTrue)) {
       Navigate.navigate(StackRoute.Main.Failed);
       return;
     }
-    if ((type === 'wrong' && !isTrue) || (type === 'right' && isTrue)) {
+    if ((type === Wrong && !isTrue) || (type === Right && isTrue)) {
       PracticeStore.setFirstParameter(randomNumber(1, 9));
       PracticeStore.setSecondParameter(randomNumber(1, 9));
       setResult(PracticeStore.calculateResult());
@@ -107,8 +107,8 @@ const PracticeScreen = observer(() => {
           />
         </View>
         <AnswerButton
-          onRightAnswer={() => pressAnswer('right')}
-          onWrongAnswer={() => pressAnswer('wrong')}
+          onRightAnswer={() => pressAnswer(Right)}
+          onWrongAnswer={() => pressAnswer(Wrong)}
         />
       </View>
       <Popup

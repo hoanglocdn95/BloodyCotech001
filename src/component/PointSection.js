@@ -5,8 +5,10 @@ import { HomeIcon, ResetIcon } from 'assets/icons/index';
 import { useNavigation } from '@react-navigation/native';
 import { spaces, widthComponent } from 'constants/theme';
 import { StackRoute } from 'constants/route';
+import { useTranslation } from 'react-i18next';
 
 const PointSection = props => {
+  const { t } = useTranslation();
   const Navigate = useNavigation();
 
   const goBackHome = () => {
@@ -24,7 +26,9 @@ const PointSection = props => {
             <Image source={HomeIcon} style={styles.icon} />
           </TouchableOpacity>
         )}
-        <Text style={styles.point}>{props.point} Điểm</Text>
+        <Text style={styles.point}>
+          {props.point} {t('component.pointSection.point')}
+        </Text>
         {props.handleReset && (
           <TouchableOpacity onPress={() => props.handleReset()}>
             <Image source={ResetIcon} style={styles.icon} />

@@ -19,8 +19,10 @@ import {
 import { PlayIcon } from 'assets/icons/index';
 import { StackRoute } from 'constants/route';
 import BattleStore from 'stores/battleStore';
+import { useTranslation } from 'react-i18next';
 
 export default function SuccessScreen() {
+  const { t } = useTranslation();
   const [isShowOption, setIsShowOption] = useState(false);
 
   const Navigate = useNavigation();
@@ -40,9 +42,12 @@ export default function SuccessScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={[styles.styleTitle, styles.title1]}>Winner</Text>
+        <Text style={[styles.styleTitle, styles.title1]}>
+          {t('success.winner')}
+        </Text>
         <Text style={[styles.styleTitle, styles.title2, chooseColor()]}>
-          Player {BattleStore.player1.point > BattleStore.player2.point ? 1 : 2}
+          {t('success.player')}{' '}
+          {BattleStore.player1.point > BattleStore.player2.point ? 1 : 2}
         </Text>
       </View>
       {isShowOption ? (
@@ -50,12 +55,16 @@ export default function SuccessScreen() {
           <TouchableHighlight
             style={styles.imageContainer}
             onPress={() => handleReStart(StackRoute.Main.Practice)}>
-            <Text style={[styles.styleTitle, styles.selectText]}>practice</Text>
+            <Text style={[styles.styleTitle, styles.selectText]}>
+              {t('welcome.practice')}
+            </Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.imageContainer}
             onPress={() => handleReStart(StackRoute.Main.Battle)}>
-            <Text style={[styles.styleTitle, styles.selectText]}>battle</Text>
+            <Text style={[styles.styleTitle, styles.selectText]}>
+              {t('welcome.battle')}
+            </Text>
           </TouchableHighlight>
         </View>
       ) : (

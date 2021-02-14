@@ -10,3 +10,6 @@ export const LanguageList = [
     languageCode: 'vi',
   },
 ];
+
+export const Right = 'right';
+export const Wrong = 'wrong';

@@ -20,15 +20,21 @@ import WorkingSection from 'component/WorkingSection';
 import { PlayIcon } from 'assets/icons/index';
 import { StackRoute } from 'constants/route';
 import PracticeStore from 'stores/practiceStore';
+import { useTranslation } from 'react-i18next';
 
 export default function FailedScreen() {
+  const { t } = useTranslation();
   const Navigate = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={[styles.styleTitle, styles.title1]}>Happy</Text>
-        <Text style={[styles.styleTitle, styles.title2]}>Math</Text>
+        <Text style={[styles.styleTitle, styles.title1]}>
+          {t('welcome.title1')}
+        </Text>
+        <Text style={[styles.styleTitle, styles.title2]}>
+          {t('welcome.title2')}
+        </Text>
       </View>
       <WorkingSection
         firstParameter={PracticeStore.FirstParameter}
@@ -37,7 +43,7 @@ export default function FailedScreen() {
         isCorrect
       />
       <View style={styles.pointContainer}>
-        <Text style={styles.pointText}>Điểm: </Text>
+        <Text style={styles.pointText}>{t('failed.point')}</Text>
         <Text style={styles.pointText}>{PracticeStore.Point}</Text>
       </View>
       <TouchableHighlight
