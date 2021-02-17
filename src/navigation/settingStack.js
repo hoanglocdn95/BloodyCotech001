@@ -8,7 +8,6 @@ import ChooseTime from 'screen/chooseTime';
 import SplashScreen from 'screen/splash';
 import { SetLanguageScreen } from 'screen/settings/index';
 import { StackRoute } from 'constants/route';
-import SettingStack from './settingStack';
 import {
   createStackNavigator,
   TransitionPresets,
@@ -16,7 +15,7 @@ import {
 
 const Stack = createStackNavigator();
 
-const DefaultStack = () => {
+const SettingStack = () => {
   const config = {
     animation: 'spring',
     config: {
@@ -37,24 +36,11 @@ const DefaultStack = () => {
         cardOverlayEnabled: false,
       })}>
       <Stack.Screen
-        name={StackRoute.Main.Splash}
-        component={SplashScreen}
-        backBehavior="none"
+        name={StackRoute.BottomTabs.Setting}
+        component={SetLanguageScreen}
       />
-      <Stack.Screen
-        name={StackRoute.Main.Welcome}
-        component={WelcomeScreen}
-        backBehavior="none"
-      />
-      <Stack.Screen name={StackRoute.Main.Practice} component={Practice} />
-      <Stack.Screen name={StackRoute.Main.Failed} component={Failed} />
-      <Stack.Screen name={StackRoute.Main.Battle} component={Battle} />
-      <Stack.Screen name={StackRoute.Main.Success} component={Success} />
-      <Stack.Screen name={StackRoute.Main.ChooseTime} component={ChooseTime} />
-
-      <Stack.Screen name={StackRoute.Stack.Setting} component={SettingStack} />
     </Stack.Navigator>
   );
 };
 
-export default DefaultStack;
+export default SettingStack;

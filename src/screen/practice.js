@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 import { colors, fonts, spaces } from 'constants/theme';
 import { useNavigation } from '@react-navigation/native';
@@ -20,6 +21,7 @@ import CountDown from 'react-native-countdown-component';
 const windowWidth = Dimensions.get('window').width;
 
 const PracticeScreen = observer(() => {
+  const { t } = useTranslation();
   const Navigate = useNavigation();
   const [result, setResult] = useState(PracticeStore.calculateResult());
   const [isShowModal, setShowModal] = useState(false);
@@ -116,9 +118,7 @@ const PracticeScreen = observer(() => {
         handleClosePopup={isShow => setShowModal(isShow)}
         handleYesButton={handleChangeLevel}
         handleNoButton={handleIgnoreChangeLevel}
-        content={
-          'Bạn có cảm thấy mức độ này quá dễ và muốn chỉnh lại mức độ hay không?'
-        }
+        content={t('practice.popupChangeLevel')}
       />
     </>
   );
