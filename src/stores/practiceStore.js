@@ -8,33 +8,6 @@ class PracticeStore {
   @observable playTime = 0;
   @observable thresholdPoint = 0;
 
-  arrPlayTime = [
-    {
-      time: 0,
-      description: 'Không có thời gian',
-    },
-    {
-      time: 45,
-      description: 'Tiểu học',
-    },
-    {
-      time: 30,
-      description: 'Trung học',
-    },
-    {
-      time: 15,
-      description: 'Phổ thông',
-    },
-    {
-      time: 10,
-      description: '18 +',
-    },
-    {
-      time: 3,
-      description: 'Game là dễ',
-    },
-  ];
-
   @action setFirstParameter(item) {
     this.firstParameter = item;
   }
@@ -80,10 +53,6 @@ class PracticeStore {
 
   @computed get PlayTime() {
     return this.playTime;
-  }
-
-  @computed get ArrPlayTime() {
-    return this.arrPlayTime;
   }
 
   @computed get ThresholdPoint() {

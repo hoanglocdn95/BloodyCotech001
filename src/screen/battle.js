@@ -52,20 +52,6 @@ const BattleScreen = observer(() => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.player1}>
-        <PointSection point={BattleStore.player1.point} isShowHomeButton />
-        <View style={styles.body}>
-          <WorkingSection
-            firstParameter={BattleStore.FirstParameter}
-            secondParameter={BattleStore.SecondParameter}
-            result={result}
-          />
-        </View>
-        <AnswerButton
-          onRightAnswer={() => pressAnswer(Right, 1)}
-          onWrongAnswer={() => pressAnswer(Wrong, 1)}
-        />
-      </View>
       <View style={styles.player2}>
         <PointSection point={BattleStore.player2.point} isShowHomeButton />
         <View style={styles.body}>
@@ -78,6 +64,20 @@ const BattleScreen = observer(() => {
         <AnswerButton
           onRightAnswer={() => pressAnswer(Right, 2)}
           onWrongAnswer={() => pressAnswer(Wrong, 2)}
+        />
+      </View>
+      <View style={styles.player1}>
+        <PointSection point={BattleStore.player1.point} isShowHomeButton />
+        <View style={styles.body}>
+          <WorkingSection
+            firstParameter={BattleStore.FirstParameter}
+            secondParameter={BattleStore.SecondParameter}
+            result={result}
+          />
+        </View>
+        <AnswerButton
+          onRightAnswer={() => pressAnswer(Right, 1)}
+          onWrongAnswer={() => pressAnswer(Wrong, 1)}
         />
       </View>
     </View>
@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
   },
   player1: {
     flex: 1,
-    transform: [{ rotate: '180deg' }],
     justifyContent: 'space-between',
     borderTopWidth: 1,
     borderColor: 'white',
@@ -107,6 +106,7 @@ const styles = StyleSheet.create({
   },
   player2: {
     flex: 1,
+    transform: [{ rotate: '180deg' }],
     justifyContent: 'space-between',
     borderTopWidth: 1,
     borderColor: 'white',

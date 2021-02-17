@@ -19,9 +19,35 @@ import { useTranslation } from 'react-i18next';
 const ChooseTimeScreen = observer(() => {
   const { t } = useTranslation();
   const Navigate = useNavigation();
+  const arrPlayTime = [
+    {
+      time: 0,
+      description: t('arrPlayTime.noTime'),
+    },
+    {
+      time: 45,
+      description: t('arrPlayTime.beginner'),
+    },
+    {
+      time: 30,
+      description: t('arrPlayTime.junior'),
+    },
+    {
+      time: 15,
+      description: t('arrPlayTime.highJunior'),
+    },
+    {
+      time: 10,
+      description: t('arrPlayTime.adult'),
+    },
+    {
+      time: 3,
+      description: t('arrPlayTime.easyGame'),
+    },
+  ];
 
   const renderListCheckbox = () => {
-    return PracticeStore.ArrPlayTime.map((item, index) => {
+    return arrPlayTime.map((item, index) => {
       return (
         <Checkbox
           key={`${item.time}_${index}`}

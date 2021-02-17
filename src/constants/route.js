@@ -1,4 +1,8 @@
 export const StackRoute = {
+  Stack: {
+    Default: 'DefaultStack',
+    Setting: 'SettingStack',
+  },
   BottomTabs: {
     Achievements: 'Achievements',
     Rank: 'Rank',
