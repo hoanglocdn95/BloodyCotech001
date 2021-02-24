@@ -51,7 +51,6 @@ const DefaultStack = () => {
       <Stack.Screen name={StackRoute.Main.Battle} component={Battle} />
       <Stack.Screen name={StackRoute.Main.Success} component={Success} />
       <Stack.Screen name={StackRoute.Main.ChooseTime} component={ChooseTime} />
-
       <Stack.Screen name={StackRoute.Stack.Setting} component={SettingStack} />
     </Stack.Navigator>
   );

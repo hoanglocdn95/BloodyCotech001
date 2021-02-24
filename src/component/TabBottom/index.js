@@ -1,19 +1,39 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  Text,
+  Image,
+} from 'react-native';
+import { LanguageIcon } from 'assets/icons/index';
+import {
+  colors,
+  fonts,
+  spaces,
+  borderRadius,
+  borderWidth,
+} from 'constants/theme';
 
 const TabBar = props => {
-  const { navigationState, navigation, position } = props;
-  return <View style={styles.container} />;
+  const { onOpenSettingLanguage } = props;
+  return (
+    <View style={styles.container}>
+      <TouchableHighlight onPress={() => onOpenSettingLanguage()}>
+        <Image source={LanguageIcon} style={styles.image} />
+      </TouchableHighlight>
+    </View>
+  );
 };
 
 export default TabBar;
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
-    backgroundColor: 'seashell',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    borderRadius: borderRadius.header,
+  },
+  image: {
+    width: 50,
+    height: 50,
   },
 });
