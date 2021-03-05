@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import {
   StyleSheet,
@@ -26,6 +26,7 @@ import WorkingSection from 'component/WorkingSection';
 import TabBottom from 'component/TabBottom/index';
 import { AnimationRocket } from 'assets/animations/index';
 import { useTranslation } from 'react-i18next';
+// import { ReqConfigAdmob } from 'services/index';
 
 export default function WelcomeScreen() {
   const { t } = useTranslation();
@@ -40,6 +41,10 @@ export default function WelcomeScreen() {
       CounterStore.reset();
     }, []),
   );
+
+  useEffect(() => {
+    // ReqConfigAdmob();
+  }, []);
 
   return (
     <View style={styles.container}>

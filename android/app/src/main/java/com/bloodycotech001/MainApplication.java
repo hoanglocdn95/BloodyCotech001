@@ -10,6 +10,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 // import com.airbnb.android.react.lottie.LottiePackage;
+import io.invertase.firebase.admob.ReactNativeFirebaseAdmobPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
