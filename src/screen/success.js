@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -21,24 +21,57 @@ import { StackRoute } from 'constants/route';
 import BattleStore from 'stores/battleStore';
 import { useTranslation } from 'react-i18next';
 
+import {
+  InterstitialAd,
+  AdEventType,
+  TestIds,
+} from '@react-native-firebase/admob';
+
+const adUnitId = TestIds.INTERSTITIAL;
+
+const interstitialAd = InterstitialAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+});
+
 export default function SuccessScreen() {
   const { t } = useTranslation();
-  const [isShowOption, setIsShowOption] = useState(false);
-
   const Navigate = useNavigation();
+  const [isLoadAdMod, setLoadAdMob] = useState(false);
 
-  const handleReStart = route => {
-    BattleStore.setPoint(0, 1);
-    BattleStore.setPoint(0, 2);
-    BattleStore.setFirstParameter(BattleStore.randomNumber(1, 9));
-    BattleStore.setSecondParameter(BattleStore.randomNumber(1, 9));
-    Navigate.navigate(route);
-  };
+  useEffect(() => {
+    const eventListener = interstitialAd.onAdEvent(type => {
+      if (type === AdEventType.LOADED) {
+        setLoadAdMob(true);
+      }
+    });
+
+    // Start loading the interstitialAd straight away
+    interstitialAd.load();
+
+    // Unsubscribe from events on unmount
+    return () => {
+      eventListener();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isLoadAdMod) {
+      interstitialAd.show();
+      setLoadAdMob(false);
+    }
+  }, [isLoadAdMod]);
+
   const chooseColor = () => {
     return BattleStore.player1.point > BattleStore.player2.point
       ? { color: 'green' }
       : { color: 'red' };
   };
+
+  const navigateToWelcome = () => {
+    BattleStore.reset();
+    Navigate.navigate(StackRoute.Main.Welcome);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -50,30 +83,11 @@ export default function SuccessScreen() {
           {BattleStore.player1.point > BattleStore.player2.point ? 1 : 2}
         </Text>
       </View>
-      {isShowOption ? (
-        <View>
-          <TouchableHighlight
-            style={styles.imageContainer}
-            onPress={() => handleReStart(StackRoute.Main.Practice)}>
-            <Text style={[styles.styleTitle, styles.selectText]}>
-              {t('welcome.practice')}
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.imageContainer}
-            onPress={() => handleReStart(StackRoute.Main.Battle)}>
-            <Text style={[styles.styleTitle, styles.selectText]}>
-              {t('welcome.battle')}
-            </Text>
-          </TouchableHighlight>
-        </View>
-      ) : (
-        <TouchableHighlight
-          style={styles.imageContainer}
-          onPress={() => setIsShowOption(true)}>
-          <Image source={PlayIcon} />
-        </TouchableHighlight>
-      )}
+      <TouchableHighlight
+        style={styles.imageContainer}
+        onPress={() => navigateToWelcome()}>
+        <Image source={PlayIcon} />
+      </TouchableHighlight>
     </View>
   );
 }

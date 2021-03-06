@@ -51,8 +51,7 @@ const PracticeScreen = observer(() => {
     CounterStore.reset();
 
     if ((type === Wrong && isTrue) || (type === Right && !isTrue)) {
-      Navigate.navigate(StackRoute.Main.Failed);
-      return;
+      return navigateToFailed();
     }
     if ((type === Wrong && !isTrue) || (type === Right && isTrue)) {
       PracticeStore.setFirstParameter(randomNumber(1, 9));
@@ -79,6 +78,10 @@ const PracticeScreen = observer(() => {
     PracticeStore.setThresholdPoint(PracticeStore.Point + ThresholdPeek);
   };
 
+  const navigateToFailed = () => {
+    return Navigate.navigate(StackRoute.Main.Failed);
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -92,7 +95,7 @@ const PracticeScreen = observer(() => {
           <CountDown
             id={`counter-${CounterStore.IsReset}`}
             until={PracticeStore.PlayTime}
-            onFinish={() => Navigate.navigate(StackRoute.Main.Failed)}
+            onFinish={() => navigateToFailed()}
             size={spaces.space4}
             timeToShow={['S']}
             timeLabels={{ s: '' }}

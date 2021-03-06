@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -22,9 +22,45 @@ import { StackRoute } from 'constants/route';
 import PracticeStore from 'stores/practiceStore';
 import { useTranslation } from 'react-i18next';
 
+import {
+  InterstitialAd,
+  AdEventType,
+  TestIds,
+} from '@react-native-firebase/admob';
+
+const adUnitId = TestIds.INTERSTITIAL;
+
+const interstitialAd = InterstitialAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+});
+
 export default function FailedScreen() {
   const { t } = useTranslation();
   const Navigate = useNavigation();
+  const [isLoadAdMod, setLoadAdMob] = useState(false);
+
+  useEffect(() => {
+    const eventListener = interstitialAd.onAdEvent(type => {
+      if (type === AdEventType.LOADED) {
+        setLoadAdMob(true);
+      }
+    });
+
+    // Start loading the interstitialAd straight away
+    interstitialAd.load();
+
+    // Unsubscribe from events on unmount
+    return () => {
+      eventListener();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isLoadAdMod) {
+      interstitialAd.show();
+      setLoadAdMob(false);
+    }
+  }, [isLoadAdMod]);
 
   return (
     <View style={styles.container}>

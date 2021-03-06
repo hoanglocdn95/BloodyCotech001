@@ -1,20 +1,22 @@
-const baseFontSize = 14;
-const space0 = 4;
+import calculateMeasure from './responsiveBase';
+
+const baseFontSize = calculateMeasure(14);
+const space0 = calculateMeasure(4);
 
 export const fonts = {
-  tiny: baseFontSize * 0.5, // 7
-  small: baseFontSize * 0.75, // 10.5
-  normal: baseFontSize * 1, // 14
-  medium: baseFontSize * 1.25, // 17.5
-  large: baseFontSize * 1.5, // 21
-  larger: baseFontSize * 1.75, // 24.5
-  largest: baseFontSize * 2, // 28
-  header1: baseFontSize * 2.5, // 42
-  header2: baseFontSize * 3, // 42
-  header3: baseFontSize * 3.5, // 49
-  header4: baseFontSize * 4, // 56
-  header5: baseFontSize * 4.5, // 56
-  header6: baseFontSize * 5, // 56
+  tiny: baseFontSize * 0.5,
+  small: baseFontSize * 0.75,
+  normal: baseFontSize * 1,
+  medium: baseFontSize * 1.25,
+  large: baseFontSize * 1.5,
+  larger: baseFontSize * 1.75,
+  largest: baseFontSize * 2,
+  header1: baseFontSize * 2.5,
+  header2: baseFontSize * 3,
+  header3: baseFontSize * 3.5,
+  header4: baseFontSize * 4,
+  header5: baseFontSize * 4.5,
+  header6: baseFontSize * 5,
 };
 
 export const colors = {
