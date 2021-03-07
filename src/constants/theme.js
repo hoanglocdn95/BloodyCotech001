@@ -3,6 +3,13 @@ import calculateMeasure from './responsiveBase';
 const baseFontSize = calculateMeasure(14);
 const space0 = calculateMeasure(4);
 
+const sizeObject = {
+  imageAnimation: space0 * 33,
+  imageContainer: space0 * 35,
+  imageBrand: space0 * 62.5,
+  buttonAnswer: space0 * 22.5,
+};
+
 export const fonts = {
   tiny: baseFontSize * 0.5,
   small: baseFontSize * 0.75,
@@ -12,10 +19,15 @@ export const fonts = {
   larger: baseFontSize * 1.75,
   largest: baseFontSize * 2,
   header1: baseFontSize * 2.5,
+  header1a: baseFontSize * 2.75,
   header2: baseFontSize * 3,
+  header2a: baseFontSize * 3.25,
   header3: baseFontSize * 3.5,
+  header3a: baseFontSize * 3.75,
   header4: baseFontSize * 4,
+  header4a: baseFontSize * 4.25,
   header5: baseFontSize * 4.5,
+  header5a: baseFontSize * 4.75,
   header6: baseFontSize * 5,
 };
 
@@ -32,6 +44,7 @@ export const colors = {
 };
 
 export const spaces = {
+  ...sizeObject,
   space0: space0 * 1, // 4
   space1: space0 * 2, // 8
   space2: space0 * 3, // 12
@@ -46,6 +59,7 @@ export const spaces = {
 
 export const borderRadius = {
   button: 4,
+  medium: 10,
   header: 12,
   circle: 999,
 };

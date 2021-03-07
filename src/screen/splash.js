@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { colors } from 'constants/theme';
+import { colors, spaces } from 'constants/theme';
 import { StackRoute } from 'constants/route';
 import { LogoBrand } from 'assets/icons/index';
 import { ReqConfigAdmob } from 'services/index';
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    height: 250,
-    width: 250,
+    height: spaces.imageBrand,
+    width: spaces.imageBrand,
   },
 });

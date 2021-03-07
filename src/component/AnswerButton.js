@@ -36,10 +36,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    paddingBottom: spaces.space2,
+    paddingBottom: spaces.space0,
   },
   buttonFooter: {
-    width: windowWidth / 2 - 15,
+    width: windowWidth / 2 - spaces.space1,
+    height: spaces.buttonAnswer,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
@@ -49,9 +50,9 @@ const styles = StyleSheet.create({
     borderColor: colors.black_light,
   },
   buttonLeft: {
-    marginLeft: 10,
+    marginLeft: spaces.space0,
   },
   buttonRight: {
-    marginHorizontal: 10,
+    marginHorizontal: spaces.space0,
   },
 });

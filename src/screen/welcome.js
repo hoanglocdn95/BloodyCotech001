@@ -27,8 +27,6 @@ import TabBottom from 'component/TabBottom/index';
 import { AnimationRocket } from 'assets/animations/index';
 import { useTranslation } from 'react-i18next';
 
-// const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-4663633976089574/5913156093';
-
 export default function WelcomeScreen() {
   const { t } = useTranslation();
   const Navigate = useNavigation();
@@ -130,7 +128,7 @@ const styles = StyleSheet.create({
     padding: spaces.space4,
   },
   imageContainer: {
-    minWidth: 150,
+    minWidth: spaces.imageContainer,
     backgroundColor: colors.white,
     borderRadius: borderRadius.header,
     justifyContent: 'center',
@@ -138,8 +136,8 @@ const styles = StyleSheet.create({
     marginBottom: spaces.space3,
   },
   styleAnimation: {
-    width: 150,
-    height: 150,
+    width: spaces.imageAnimation,
+    height: spaces.imageAnimation,
     marginBottom: spaces.space5,
   },
 });

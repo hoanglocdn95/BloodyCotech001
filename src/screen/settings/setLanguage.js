@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     marginTop: spaces.space5,
   },
   imageContainer: {
-    minWidth: 150,
+    minWidth: spaces.imageContainer,
     backgroundColor: colors.white,
     borderRadius: borderRadius.header,
     justifyContent: 'center',
