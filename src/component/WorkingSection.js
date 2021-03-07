@@ -4,7 +4,13 @@ import { View, StyleSheet, Text, Animated } from 'react-native';
 import { colors, fonts, spaces } from 'constants/theme';
 
 const WorkingSection = props => {
-  const { firstParameter, secondParameter, result, isCorrect } = props;
+  const {
+    firstParameter,
+    secondParameter,
+    result,
+    isCorrect,
+    fontSize,
+  } = props;
   const fadeAnim = new Animated.Value(0);
   const rotateY360deg = new Animated.Value(0);
 
@@ -35,10 +41,12 @@ const WorkingSection = props => {
   return (
     <View style={styles.expressionContainer}>
       <View style={styles.numberContainer}>
-        <Text style={styles.number}>
+        <Text style={[styles.number, fontSize && { fontSize: fontSize }]}>
           {firstParameter} + {secondParameter}
         </Text>
-        <Text style={styles.number}>= {result}</Text>
+        <Text style={[styles.number, fontSize && { fontSize: fontSize }]}>
+          = {result}
+        </Text>
       </View>
       <Animated.View
         style={[
@@ -47,7 +55,16 @@ const WorkingSection = props => {
             transform: [{ rotateY: rotateY360deg }],
           },
         ]}>
-        <Text style={styles.questionMark}>{isCorrect ? '!' : '?'}</Text>
+        <Text
+          style={[
+            styles.questionMark,
+            fontSize && {
+              fontSize: fonts.header6 + fontSize,
+              lineHeight: fonts.header6 + fontSize,
+            },
+          ]}>
+          {isCorrect ? '!' : '?'}
+        </Text>
       </Animated.View>
     </View>
   );

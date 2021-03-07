@@ -24,10 +24,10 @@ import { useTranslation } from 'react-i18next';
 import {
   InterstitialAd,
   AdEventType,
-  TestIds,
+  // TestIds,
 } from '@react-native-firebase/admob';
 
-const adUnitId = TestIds.INTERSTITIAL;
+const adUnitId = 'ca-app-pub-4663633976089574/4675014473';
 
 const interstitialAd = InterstitialAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     color: colors.text,
   },
   imageContainer: {
-    minWidth: 150,
+    minWidth: spaces.imageContainer,
     backgroundColor: colors.white,
     borderRadius: borderRadius.header,
     justifyContent: 'center',

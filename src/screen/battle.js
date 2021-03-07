@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 
-import { colors } from 'constants/theme';
+import { colors, fonts } from 'constants/theme';
 import { Right, Wrong } from 'constants/common';
 import { useNavigation } from '@react-navigation/native';
 import { StackRoute } from 'constants/route';
@@ -59,6 +59,7 @@ const BattleScreen = observer(() => {
             firstParameter={BattleStore.FirstParameter}
             secondParameter={BattleStore.SecondParameter}
             result={result}
+            fontSize={fonts.header3}
           />
         </View>
         <AnswerButton
@@ -73,6 +74,7 @@ const BattleScreen = observer(() => {
             firstParameter={BattleStore.FirstParameter}
             secondParameter={BattleStore.SecondParameter}
             result={result}
+            fontSize={fonts.header3a}
           />
         </View>
         <AnswerButton
