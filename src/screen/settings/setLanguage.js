@@ -63,7 +63,9 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     color: colors.text,
     fontSize: fonts.larger,
-    marginRight: spaces.space2,
+    width: '100%',
+    alignSelf: 'center',
+    textAlign: 'center',
   },
   containerList: {
     marginTop: spaces.space5,

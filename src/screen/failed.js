@@ -19,17 +19,18 @@ import WorkingSection from 'component/WorkingSection';
 
 import { PlayIcon } from 'assets/icons/index';
 import { StackRoute } from 'constants/route';
+import AppID from 'constants/admob';
 import PracticeStore from 'stores/practiceStore';
 import { useTranslation } from 'react-i18next';
 
 import {
   InterstitialAd,
   AdEventType,
-  // TestIds,
+  TestIds,
 } from '@react-native-firebase/admob';
 
-// const adUnitId = TestIds.INTERSTITIAL;
-const adUnitId = 'ca-app-pub-4663633976089574/4270570230';
+const adUnitId = TestIds.INTERSTITIAL;
+// const adUnitId = AppID.interstitial.FAILED_SCREEN.id;
 
 const interstitialAd = InterstitialAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
@@ -59,7 +60,7 @@ export default function FailedScreen() {
   useEffect(() => {
     if (isLoadAdMod) {
       interstitialAd.show();
-      setLoadAdMob(false);
+      setLoadAdMob(true);
     }
   }, [isLoadAdMod]);
 
@@ -83,11 +84,13 @@ export default function FailedScreen() {
         <Text style={styles.pointText}>{t('failed.point')}</Text>
         <Text style={styles.pointText}>{PracticeStore.Point}</Text>
       </View>
-      <TouchableHighlight
-        style={styles.imageContainer}
-        onPress={() => Navigate.navigate(StackRoute.Main.Welcome)}>
-        <Image source={PlayIcon} />
-      </TouchableHighlight>
+      {isLoadAdMod && (
+        <TouchableHighlight
+          style={styles.imageContainer}
+          onPress={() => Navigate.navigate(StackRoute.Main.Welcome)}>
+          <Image source={PlayIcon} />
+        </TouchableHighlight>
+      )}
     </View>
   );
 }

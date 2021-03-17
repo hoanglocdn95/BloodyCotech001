@@ -19,5 +19,6 @@ export const StackRoute = {
     Success: 'Success',
     Select: 'Select',
     ChooseTime: 'ChooseTime',
+    SelectMode: 'SelectMode',
   },
 };

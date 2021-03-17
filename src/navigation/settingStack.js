@@ -11,6 +11,7 @@ import { StackRoute } from 'constants/route';
 import {
   createStackNavigator,
   TransitionPresets,
+  TransitionSpecs,
 } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
@@ -30,11 +31,16 @@ const SettingStack = () => {
   return (
     <Stack.Navigator
       initialRouteName={StackRoute.Main.Splash}
-      screenOptions={({ route, navigation }) => ({
+      screenOptions={{
         headerShown: false,
-        gestureEnabled: true,
-        cardOverlayEnabled: false,
-      })}>
+        gestureDirection: 'horizontal',
+        transitionSpec: {
+          open: TransitionSpecs.FadeInFromBottomAndroidSpec,
+          close: TransitionPresets.RevealFromBottomAndroid,
+          // open: config,
+          // close: config,
+        },
+      }}>
       <Stack.Screen
         name={StackRoute.BottomTabs.Setting}
         component={SetLanguageScreen}
