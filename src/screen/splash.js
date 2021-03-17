@@ -5,13 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 import { colors, spaces } from 'constants/theme';
 import { StackRoute } from 'constants/route';
 import { LogoBrand } from 'assets/icons/index';
-import { ReqConfigAdmob } from 'services/index';
 
 export default function SplashScreen() {
   const Navigate = useNavigation();
 
   useEffect(() => {
-    ReqConfigAdmob();
     setTimeout(() => Navigate.navigate(StackRoute.Main.Welcome), 3000);
   });
 

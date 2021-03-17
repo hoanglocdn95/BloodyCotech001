@@ -12,8 +12,6 @@ import { colors, fonts, spaces, borderRadius } from 'constants/theme';
 import { useNavigation } from '@react-navigation/native';
 import { StackRoute } from 'constants/route';
 import { BattleIcon, PracticeIcon } from 'assets/icons/index';
-import PracticeStore from 'stores/practiceStore';
-import Checkbox from 'component/Form/Checkbox';
 import { useTranslation } from 'react-i18next';
 
 const SelectModeScreen = observer(() => {
@@ -57,6 +55,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontSize: fonts.larger,
     textAlign: 'center',
+    fontWeight: 'bold',
   },
   containerButton: {
     marginTop: spaces.space5,

@@ -7,8 +7,9 @@ import {
   TouchableHighlight,
   Image,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
+import { useTranslation } from 'react-i18next';
 
 import {
   colors,
@@ -25,16 +26,14 @@ import { StackRoute } from 'constants/route';
 import WorkingSection from 'component/WorkingSection';
 import TabBottom from 'component/TabBottom/index';
 import { AnimationRocket } from 'assets/animations/index';
-import { useTranslation } from 'react-i18next';
+import BottomStack from 'navigation/bottomStack';
 
 export default function WelcomeScreen() {
   const { t } = useTranslation();
   const Navigate = useNavigation();
-  const [isShowOption, setIsShowOption] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
-      setIsShowOption(false);
       this.animation.play();
       PracticeStore.reset();
       CounterStore.reset();

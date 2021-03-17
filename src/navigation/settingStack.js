@@ -10,7 +10,7 @@ import { SetLanguageScreen } from 'screen/settings/index';
 import { StackRoute } from 'constants/route';
 import {
   createStackNavigator,
-  TransitionPresets,
+  CardStyleInterpolators,
   TransitionSpecs,
 } from '@react-navigation/stack';
 
@@ -18,10 +18,11 @@ const Stack = createStackNavigator();
 
 const SettingStack = () => {
   const config = {
+    ...TransitionSpecs.TransitionIOSSpec,
     animation: 'spring',
     config: {
-      stiffness: 1000,
-      damping: 500,
+      stiffness: 600,
+      damping: 200,
       mass: 3,
       overshootClamping: true,
       restDisplacementThreshold: 0.01,
@@ -33,12 +34,11 @@ const SettingStack = () => {
       initialRouteName={StackRoute.Main.Splash}
       screenOptions={{
         headerShown: false,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         gestureDirection: 'horizontal',
         transitionSpec: {
-          open: TransitionSpecs.FadeInFromBottomAndroidSpec,
-          close: TransitionPresets.RevealFromBottomAndroid,
-          // open: config,
-          // close: config,
+          open: config,
+          close: config,
         },
       }}>
       <Stack.Screen
