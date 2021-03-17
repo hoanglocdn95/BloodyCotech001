@@ -6,22 +6,24 @@ import WelcomeScreen from 'screen/welcome';
 import Battle from 'screen/battle';
 import ChooseTime from 'screen/chooseTime';
 import SplashScreen from 'screen/splash';
-import { SetLanguageScreen } from 'screen/settings/index';
+import SelectMode from 'screen/selectMode';
 import { StackRoute } from 'constants/route';
 import SettingStack from './settingStack';
 import {
+  CardStyleInterpolators,
   createStackNavigator,
-  TransitionPresets,
+  TransitionSpecs,
 } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
 const DefaultStack = () => {
   const config = {
+    ...TransitionSpecs.TransitionIOSSpec,
     animation: 'spring',
     config: {
-      stiffness: 1000,
-      damping: 500,
+      stiffness: 600,
+      damping: 200,
       mass: 3,
       overshootClamping: true,
       restDisplacementThreshold: 0.01,
@@ -31,21 +33,18 @@ const DefaultStack = () => {
   return (
     <Stack.Navigator
       initialRouteName={StackRoute.Main.Splash}
-      screenOptions={({ route, navigation }) => ({
+      screenOptions={{
         headerShown: false,
-        gestureEnabled: true,
-        cardOverlayEnabled: false,
-      })}>
-      <Stack.Screen
-        name={StackRoute.Main.Splash}
-        component={SplashScreen}
-        backBehavior="none"
-      />
-      <Stack.Screen
-        name={StackRoute.Main.Welcome}
-        component={WelcomeScreen}
-        backBehavior="none"
-      />
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        gestureDirection: 'horizontal',
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
+      }}>
+      <Stack.Screen name={StackRoute.Main.Splash} component={SplashScreen} />
+      <Stack.Screen name={StackRoute.Main.Welcome} component={WelcomeScreen} />
+      <Stack.Screen name={StackRoute.Main.SelectMode} component={SelectMode} />
       <Stack.Screen name={StackRoute.Main.Practice} component={Practice} />
       <Stack.Screen name={StackRoute.Main.Failed} component={Failed} />
       <Stack.Screen name={StackRoute.Main.Battle} component={Battle} />

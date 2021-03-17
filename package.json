@@ -47,7 +47,8 @@
     "react-native-screens": "^2.8.0",
     "react-native-shadow": "^1.2.2",
     "react-native-svg": "^12.1.0",
-    "react-native-typescript-transformer": "^1.2.13"
+    "react-native-typescript-transformer": "^1.2.13",
+    "react-navigation-animated-switch": "^0.6.4"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

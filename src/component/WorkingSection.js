@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
   expressionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: spaces.space4,
   },
   numberContainer: {
     alignItems: 'center',

@@ -2,11 +2,14 @@ const English = {
   welcome: {
     title1: 'Learn',
     title2: 'Math',
+  },
+  selectMode: {
+    chooseMode: 'Select mode you want',
     practice: 'practice',
     battle: 'battle',
   },
   chooseTime: {
-    chooseYourTime: 'Choose your play time!',
+    chooseYourTime: 'Choose your play time',
     second: 'second',
   },
   failed: {

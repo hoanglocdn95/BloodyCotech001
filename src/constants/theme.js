@@ -1,9 +1,18 @@
-import calculateMeasure from './responsiveBase';
+// import calculateMeasure from './responsiveBase';
 
-const baseFontSize = calculateMeasure(14);
-const space0 = calculateMeasure(4);
+import { Dimensions } from 'react-native';
+
+// const screenWidth = Dimensions.get('screen').width;
+// const screenHeight = Dimensions.get('screen').height;
+
+const windowWidth = Dimensions.get('window').width;
+// const windowHeight = Dimensions.get('window').height;
+
+const baseFontSize = windowWidth * 0.04;
+const space0 = windowWidth * 0.012;
 
 const sizeObject = {
+  imageIcon: space0 * 10,
   imageAnimation: space0 * 33,
   imageContainer: space0 * 35,
   imageBrand: space0 * 62.5,

@@ -2,11 +2,14 @@ const VietNam = {
   welcome: {
     title1: 'Học',
     title2: 'Toán',
+  },
+  selectMode: {
+    chooseMode: 'Chọn chế độ bạn muốn',
     practice: 'Thực hành',
     battle: 'So tài',
   },
   chooseTime: {
-    chooseYourTime: 'Chọn thời gian chơi!',
+    chooseYourTime: 'Chọn thời gian chơi',
     second: 'giây',
   },
   failed: {

@@ -60,30 +60,11 @@ export default function WelcomeScreen() {
         loop={true}
         source={AnimationRocket}
       />
-      {isShowOption ? (
-        <View>
-          <TouchableHighlight
-            style={styles.imageContainer}
-            onPress={() => Navigate.navigate(StackRoute.Main.ChooseTime)}>
-            <Text style={[styles.styleTitle, styles.selectText]}>
-              {t('welcome.practice')}
-            </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.imageContainer}
-            onPress={() => Navigate.navigate(StackRoute.Main.Battle)}>
-            <Text style={[styles.styleTitle, styles.selectText]}>
-              {t('welcome.battle')}
-            </Text>
-          </TouchableHighlight>
-        </View>
-      ) : (
-        <TouchableHighlight
-          style={styles.imageContainer}
-          onPress={() => setIsShowOption(true)}>
-          <Image source={PlayIcon} />
-        </TouchableHighlight>
-      )}
+      <TouchableHighlight
+        style={styles.imageContainer}
+        onPress={() => Navigate.navigate(StackRoute.Main.SelectMode)}>
+        <Image source={PlayIcon} />
+      </TouchableHighlight>
       <TabBottom
         onOpenSettingLanguage={() =>
           Navigate.navigate(StackRoute.Stack.Setting, {

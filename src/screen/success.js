@@ -24,10 +24,12 @@ import { useTranslation } from 'react-i18next';
 import {
   InterstitialAd,
   AdEventType,
-  // TestIds,
+  TestIds,
 } from '@react-native-firebase/admob';
+import AppID from 'constants/admob';
 
-const adUnitId = 'ca-app-pub-4663633976089574/4675014473';
+// const adUnitId = AppID.interstitial.SUCCESS_SCREEN.id;
+const adUnitId = TestIds.INTERSTITIAL;
 
 const interstitialAd = InterstitialAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
@@ -57,7 +59,7 @@ export default function SuccessScreen() {
   useEffect(() => {
     if (isLoadAdMod) {
       interstitialAd.show();
-      setLoadAdMob(false);
+      setLoadAdMob(true);
     }
   }, [isLoadAdMod]);
 
@@ -83,11 +85,13 @@ export default function SuccessScreen() {
           {BattleStore.player1.point > BattleStore.player2.point ? 1 : 2}
         </Text>
       </View>
-      <TouchableHighlight
-        style={styles.imageContainer}
-        onPress={() => navigateToWelcome()}>
-        <Image source={PlayIcon} />
-      </TouchableHighlight>
+      {isLoadAdMod && (
+        <TouchableHighlight
+          style={styles.imageContainer}
+          onPress={() => navigateToWelcome()}>
+          <Image source={PlayIcon} />
+        </TouchableHighlight>
+      )}
     </View>
   );
 }

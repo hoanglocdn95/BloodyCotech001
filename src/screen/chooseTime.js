@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     color: colors.text,
     fontSize: fonts.larger,
-    marginRight: spaces.space2,
   },
   containerList: {
     marginTop: spaces.space5,
