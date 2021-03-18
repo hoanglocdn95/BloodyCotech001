@@ -4,9 +4,8 @@ export const StackRoute = {
     Setting: 'SettingStack',
   },
   BottomTabs: {
-    Achievements: 'Achievements',
-    Rank: 'Rank',
-    Rate: 'Rate',
+    Default: 'Default',
+    Profile: 'Profile',
     Setting: 'Setting',
   },
   Main: {

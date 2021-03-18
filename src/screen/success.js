@@ -59,7 +59,6 @@ export default function SuccessScreen() {
   useEffect(() => {
     if (isLoadAdMod) {
       interstitialAd.show();
-      setLoadAdMob(true);
     }
   }, [isLoadAdMod]);
 

@@ -7,5 +7,5 @@ export const ResetIcon = require('./icons8-available-updates-100.png');
 export const LogoBrand = require('./logo_brand.png');
 export const LanguageIcon = require('./language-icon.png');
 export const BattleIcon = require('./icons8-battle-96.png');
-export const PracticeIcon = require('./icons8-guru-52.png');
+export const PracticeIcon = require('./icons8-guru-96.png');
 export const SettingIcon = require('./icons8-gear-64.png');
