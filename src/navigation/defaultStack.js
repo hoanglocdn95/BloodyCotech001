@@ -5,10 +5,10 @@ import Success from 'screen/success';
 import WelcomeScreen from 'screen/welcome';
 import Battle from 'screen/battle';
 import ChooseTime from 'screen/chooseTime';
-import SplashScreen from 'screen/splash';
 import SelectMode from 'screen/selectMode';
 import { StackRoute } from 'constants/route';
 import SettingStack from './settingStack';
+import BottomStack from './bottomStack';
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -32,7 +32,7 @@ const DefaultStack = () => {
   };
   return (
     <Stack.Navigator
-      initialRouteName={StackRoute.Main.Splash}
+      initialRouteName={StackRoute.Stack.Bottom}
       screenOptions={{
         headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -42,15 +42,13 @@ const DefaultStack = () => {
           close: config,
         },
       }}>
-      <Stack.Screen name={StackRoute.Main.Splash} component={SplashScreen} />
-      <Stack.Screen name={StackRoute.Main.Welcome} component={WelcomeScreen} />
+      <Stack.Screen name={StackRoute.Stack.Bottom} component={BottomStack} />
       <Stack.Screen name={StackRoute.Main.SelectMode} component={SelectMode} />
       <Stack.Screen name={StackRoute.Main.Practice} component={Practice} />
       <Stack.Screen name={StackRoute.Main.Failed} component={Failed} />
       <Stack.Screen name={StackRoute.Main.Battle} component={Battle} />
       <Stack.Screen name={StackRoute.Main.Success} component={Success} />
       <Stack.Screen name={StackRoute.Main.ChooseTime} component={ChooseTime} />
-      <Stack.Screen name={StackRoute.Stack.Setting} component={SettingStack} />
     </Stack.Navigator>
   );
 };

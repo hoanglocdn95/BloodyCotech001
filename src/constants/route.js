@@ -2,9 +2,10 @@ export const StackRoute = {
   Stack: {
     Default: 'DefaultStack',
     Setting: 'SettingStack',
+    Bottom: 'BottomStack',
   },
   BottomTabs: {
-    Default: 'Default',
+    Default: 'Home',
     Profile: 'Profile',
     Setting: 'Setting',
   },

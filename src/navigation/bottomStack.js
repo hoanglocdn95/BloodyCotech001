@@ -9,34 +9,23 @@ import {
   TransitionSpecs,
 } from '@react-navigation/stack';
 import DefaultStack from 'navigation/defaultStack';
+import TabBottom from 'component/TabBottom';
+import WelcomeScreen from 'screen/welcome';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
 const BottomStack = () => {
-  const config = {
-    ...TransitionSpecs.TransitionIOSSpec,
-    animation: 'spring',
-    config: {
-      stiffness: 600,
-      damping: 200,
-      mass: 3,
-      overshootClamping: true,
-      restDisplacementThreshold: 0.01,
-      restSpeedThreshold: 0.01,
-    },
-  };
   return (
-    <Tab.Navigator initialRouteName={StackRoute.BottomTabs.Default}>
+    <Tab.Navigator
+      initialRouteName={StackRoute.Main.Welcome}
+      tabBar={props => <TabBottom {...props} />}>
       <Tab.Screen
         name={StackRoute.BottomTabs.Setting}
         component={SetLanguageScreen}
       />
-      <Tab.Screen
-        name={StackRoute.BottomTabs.Default}
-        component={DefaultStack}
-      />
+      <Tab.Screen name={StackRoute.Main.Welcome} component={WelcomeScreen} />
       <Tab.Screen
         name={StackRoute.BottomTabs.Profile}
         component={ProfileScreen}

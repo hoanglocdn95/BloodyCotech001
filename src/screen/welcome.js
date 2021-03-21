@@ -64,13 +64,6 @@ export default function WelcomeScreen() {
         onPress={() => Navigate.navigate(StackRoute.Main.SelectMode)}>
         <Image source={PlayIcon} />
       </TouchableHighlight>
-      <TabBottom
-        onOpenSettingLanguage={() =>
-          Navigate.navigate(StackRoute.Stack.Setting, {
-            screen: StackRoute.BottomTabs.Setting,
-          })
-        }
-      />
     </View>
   );
 }

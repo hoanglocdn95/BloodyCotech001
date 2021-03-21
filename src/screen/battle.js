@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderTopWidth: 1,
     borderColor: 'white',
-    backgroundColor: 'green',
+    backgroundColor: colors.bg_primary,
   },
   player2: {
     flex: 1,
@@ -112,6 +112,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderTopWidth: 1,
     borderColor: 'white',
-    backgroundColor: 'red',
+    backgroundColor: colors.bg_secondary,
   },
 });
