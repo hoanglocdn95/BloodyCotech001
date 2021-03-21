@@ -12,7 +12,6 @@ import { colors, fonts, spaces, borderRadius } from 'constants/theme';
 import { useNavigation } from '@react-navigation/native';
 import { StackRoute } from 'constants/route';
 import { LanguageList } from 'constants/common';
-import { PlayIcon } from 'assets/icons/index';
 import Checkbox from 'component/Form/Checkbox';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
@@ -41,11 +40,6 @@ const SetLanguageScreen = observer(() => {
     <View style={styles.container}>
       <Text style={styles.styleTitle}> {t('settings.language.title')}</Text>
       <View style={styles.containerList}>{renderListCheckbox()}</View>
-      <TouchableHighlight
-        style={styles.imageContainer}
-        onPress={() => Navigate.navigate(StackRoute.Main.Welcome)}>
-        <Image source={PlayIcon} />
-      </TouchableHighlight>
     </View>
   );
 });

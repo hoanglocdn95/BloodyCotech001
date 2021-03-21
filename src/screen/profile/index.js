@@ -14,7 +14,6 @@ import { StackRoute } from 'constants/route';
 import { LanguageList } from 'constants/common';
 import { PlayIcon } from 'assets/icons/index';
 import Checkbox from 'component/Form/Checkbox';
-import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 const ProfileScreen = observer(() => {
@@ -23,8 +22,7 @@ const ProfileScreen = observer(() => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.styleTitle}> {t('settings.language.title')}</Text>
-      <Text style={styles.styleTitle}> Profile</Text>
+      <Text style={styles.styleTitle}> {t('settings.profile.title')}</Text>
     </View>
   );
 });

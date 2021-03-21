@@ -27,6 +27,9 @@ const English = {
     language: {
       title: 'Choose your language',
     },
+    profile: {
+      title: 'Profile',
+    },
   },
   arrPlayTime: {
     noTime: 'No limit time',

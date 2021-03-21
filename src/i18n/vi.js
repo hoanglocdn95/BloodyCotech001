@@ -27,6 +27,9 @@ const VietNam = {
     language: {
       title: 'Chọn ngôn ngữ',
     },
+    profile: {
+      title: 'Hồ sơ',
+    },
   },
   arrPlayTime: {
     noTime: 'Không có thời gian',

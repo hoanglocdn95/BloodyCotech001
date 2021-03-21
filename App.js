@@ -2,8 +2,9 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import i18n from './src/i18n/index';
-import BottomStack from './src/navigation/bottomStack';
+import DefaultStack from './src/navigation/defaultStack';
 import { ReqConfigAdmob } from './src/services/index';
+// import LoadingIndicator from './src/component/LoadingIndicator';
 
 const _initI18n = i18n;
 
@@ -13,8 +14,10 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <BottomStack />
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <DefaultStack />
+      </NavigationContainer>
+    </>
   );
 }
