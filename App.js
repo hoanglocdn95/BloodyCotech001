@@ -5,12 +5,24 @@ import i18n from './src/i18n/index';
 import DefaultStack from './src/navigation/defaultStack';
 import { ReqConfigAdmob } from './src/services/index';
 // import LoadingIndicator from './src/component/LoadingIndicator';
+import { getData } from './src/utils/sensitiveInfo';
+import { MineCoinKey } from './src/constants/common';
 
 const _initI18n = i18n;
 
 export default function App() {
+  const [coin, setCoin] = React.useState(0);
   React.useEffect(() => {
     ReqConfigAdmob();
+    getData(MineCoinKey);
+    getData('hello').then(
+      function(value) {
+        console.log(value);
+      },
+      function(error) {
+        console.log(error);
+      },
+    );
   }, []);
 
   return (

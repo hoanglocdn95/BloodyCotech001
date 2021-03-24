@@ -45,6 +45,7 @@
     "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "^3.0.3",
     "react-native-screens": "^2.8.0",
+    "react-native-sensitive-info": "^6.0.0-alpha.9",
     "react-native-shadow": "^1.2.2",
     "react-native-splash-screen": "^3.2.0",
     "react-native-svg": "^12.1.0",
