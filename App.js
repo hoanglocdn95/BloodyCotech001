@@ -15,14 +15,6 @@ export default function App() {
   React.useEffect(() => {
     ReqConfigAdmob();
     getData(MineCoinKey);
-    getData('hello').then(
-      function(value) {
-        console.log(value);
-      },
-      function(error) {
-        console.log(error);
-      },
-    );
   }, []);
 
   return (

@@ -1,34 +1,37 @@
 import SInfo from 'react-native-sensitive-info';
 
-export const setData = (key, value) =>
-  new Promise((resolve, reject) => {
-    const res = SInfo.setItem(key, value, {});
-    if (res) {
-      resolve(res);
-    } else {
-      reject(res);
-    }
-  });
+export const setData = async (key, value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await SInfo.setItem(key, jsonValue, {});
+  } catch {
+    e => {
+      console.log('setData', e);
+    };
+  }
+};
 
-export const getData = key =>
-  new Promise(function(resolve, reject) {
-    console.log('key', key);
-    const res = SInfo.getItem(key, {});
-    if (res) {
-      resolve(res);
-    } else {
-      reject(res);
+export const getData = async key => {
+  try {
+    const jsonValue = await SInfo.getItem(key, {});
+    if (!jsonValue) {
+      return setData(key, '0');
     }
-  });
+    const res = JSON.parse(jsonValue);
+    return res;
+  } catch {
+    e => {
+      console.log('getData', e);
+    };
+  }
+};
 
-export const deleteData = key =>
-  new Promise((resolve, reject) => {
-    const res = SInfo.deleteItem(key, {});
-    if (res) {
-      resolve(res);
-    } else {
-      reject(res);
-    }
-  });
-
-export const gettingAllKeys = new Promise(SInfo.getAllItems({}));
+export const deleteData = async key => {
+  try {
+    SInfo.deleteItem(key, {});
+  } catch {
+    e => {
+      console.log('deleteData', e);
+    };
+  }
+};
