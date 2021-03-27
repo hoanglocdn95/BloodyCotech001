@@ -13,3 +13,5 @@ export const LanguageList = [
 
 export const Right = 'right';
 export const Wrong = 'wrong';
+
+export const MineCoinKey = 'BloodyCotech';

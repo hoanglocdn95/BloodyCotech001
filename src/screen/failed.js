@@ -21,6 +21,7 @@ import { PlayIcon } from 'assets/icons/index';
 import { StackRoute } from 'constants/route';
 import AppID from 'constants/admob';
 import PracticeStore from 'stores/practiceStore';
+import LoadingStore from 'stores/loadingStore';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -42,9 +43,11 @@ export default function FailedScreen() {
   const [isLoadAdMod, setLoadAdMob] = useState(false);
 
   useEffect(() => {
+    LoadingStore.setLoadingIndicator(true);
     const eventListener = interstitialAd.onAdEvent(type => {
       if (type === AdEventType.LOADED) {
         setLoadAdMob(true);
+        LoadingStore.setLoadingIndicator(false);
       }
     });
 
@@ -60,7 +63,7 @@ export default function FailedScreen() {
   useEffect(() => {
     if (isLoadAdMod) {
       interstitialAd.show();
-      setLoadAdMob(true);
+      LoadingStore.setLoadingIndicator(false);
     }
   }, [isLoadAdMod]);
 
@@ -84,13 +87,11 @@ export default function FailedScreen() {
         <Text style={styles.pointText}>{t('failed.point')}</Text>
         <Text style={styles.pointText}>{PracticeStore.Point}</Text>
       </View>
-      {isLoadAdMod && (
-        <TouchableHighlight
-          style={styles.imageContainer}
-          onPress={() => Navigate.navigate(StackRoute.Main.Welcome)}>
-          <Image source={PlayIcon} />
-        </TouchableHighlight>
-      )}
+      <TouchableHighlight
+        style={styles.imageContainer}
+        onPress={() => Navigate.navigate(StackRoute.Main.Welcome)}>
+        <Image source={PlayIcon} />
+      </TouchableHighlight>
     </View>
   );
 }

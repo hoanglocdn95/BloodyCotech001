@@ -10,7 +10,7 @@ class LoadingStore {
     }
   }
 
-  @computed IsShowLoading() {
+  @computed get IsShowLoading() {
     return this.isShowLoading;
   }
 }

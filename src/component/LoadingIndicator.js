@@ -1,20 +1,30 @@
 import * as React from 'react';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { observer } from 'mobx-react-lite';
+import { ActivityIndicator, StyleSheet } from 'react-native';
+import Modal from 'react-native-modal';
 import LoadingStore from 'stores/loadingStore';
+import { colors } from 'constants/theme';
 
-const LoadingIndicator = () => {
-  return LoadingStore.IsShowLoading ? (
-    <View style={styles.container}>
-      <ActivityIndicator />
-    </View>
-  ) : null;
-};
+const LoadingIndicator = observer(() => {
+  return (
+    LoadingStore.IsShowLoading && (
+      <Modal
+        style={styles.modal}
+        isVisible={LoadingStore.IsShowLoading}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+        backdropOpacity={0.3}
+        onModalHide={() => LoadingStore.setLoadingIndicator(false)}>
+        <ActivityIndicator size="large" color={colors.white} />
+      </Modal>
+    )
+  );
+});
 
 export default LoadingIndicator;
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
+  modal: {
     flex: 1,
   },
 });

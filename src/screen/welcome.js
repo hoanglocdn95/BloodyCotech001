@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import {
   StyleSheet,
@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
   Image,
 } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -24,9 +24,7 @@ import CounterStore from 'stores/counterStore';
 import { PlayIcon } from 'assets/icons/index';
 import { StackRoute } from 'constants/route';
 import WorkingSection from 'component/WorkingSection';
-import TabBottom from 'component/TabBottom/index';
 import { AnimationRocket } from 'assets/animations/index';
-import BottomStack from 'navigation/bottomStack';
 
 export default function WelcomeScreen() {
   const { t } = useTranslation();
