@@ -26,10 +26,10 @@ import {
   TestIds,
 } from '@react-native-firebase/admob';
 
-const adUnitId = TestIds.INTERSTITIAL;
-// const adUnitId = AppID.interstitial.FAILED_SCREEN.id;
+const adRewardId = TestIds.REWARDED;
+// const adRewardId = AppID.interstitial.REWARD_1.id;
 
-const rewardedAd = RewardedAd.createForAdRequest(adUnitId, {
+const rewardedAd = RewardedAd.createForAdRequest(adRewardId, {
   requestNonPersonalizedAdsOnly: true,
 });
 
@@ -42,15 +42,19 @@ const ProfileScreen = observer(() => {
   //   const value = getData(MineCoinKey);
   //   console.log('useEffect ~ value', value);
   // }, []);
-
   useEffect(() => {
     const eventListener = rewardedAd.onAdEvent((type, error, reward) => {
-      if (type === RewardedAdEventType.LOADED) {
-        setLoadAdMob(true);
-      }
-
-      if (type === RewardedAdEventType.EARNED_REWARD) {
-        console.log('User earned reward of ', reward);
+      console.log('file: index.js ~ line 48 ~ eventListener ~ type', type);
+      switch (type) {
+        case RewardedAdEventType.LOADED:
+          console.log('file: LOADED ~ reward', reward);
+          setLoadAdMob(true);
+          break;
+        case RewardedAdEventType.EARNED_REWARD:
+          console.log('file: EARNED_REWARD ~ reward', reward);
+          break;
+        default:
+          break;
       }
     });
 

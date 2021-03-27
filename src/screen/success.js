@@ -19,6 +19,7 @@ import {
 import { PlayIcon } from 'assets/icons/index';
 import { StackRoute } from 'constants/route';
 import BattleStore from 'stores/battleStore';
+import LoadingStore from 'stores/loadingStore';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -41,9 +42,11 @@ export default function SuccessScreen() {
   const [isLoadAdMod, setLoadAdMob] = useState(false);
 
   useEffect(() => {
+    LoadingStore.setLoadingIndicator(true);
     const eventListener = interstitialAd.onAdEvent(type => {
       if (type === AdEventType.LOADED) {
         setLoadAdMob(true);
+        LoadingStore.setLoadingIndicator(false);
       }
     });
 
@@ -59,6 +62,7 @@ export default function SuccessScreen() {
   useEffect(() => {
     if (isLoadAdMod) {
       interstitialAd.show();
+      LoadingStore.setLoadingIndicator(false);
     }
   }, [isLoadAdMod]);
 
@@ -84,13 +88,11 @@ export default function SuccessScreen() {
           {BattleStore.player1.point > BattleStore.player2.point ? 1 : 2}
         </Text>
       </View>
-      {isLoadAdMod && (
-        <TouchableHighlight
-          style={styles.imageContainer}
-          onPress={() => navigateToWelcome()}>
-          <Image source={PlayIcon} />
-        </TouchableHighlight>
-      )}
+      <TouchableHighlight
+        style={styles.imageContainer}
+        onPress={() => navigateToWelcome()}>
+        <Image source={PlayIcon} />
+      </TouchableHighlight>
     </View>
   );
 }

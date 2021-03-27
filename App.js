@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import i18n from './src/i18n/index';
 import DefaultStack from './src/navigation/defaultStack';
 import { ReqConfigAdmob } from './src/services/index';
-// import LoadingIndicator from './src/component/LoadingIndicator';
+import LoadingIndicator from './src/component/LoadingIndicator';
 import { getData } from './src/utils/sensitiveInfo';
 import { MineCoinKey } from './src/constants/common';
 
@@ -19,6 +19,7 @@ export default function App() {
 
   return (
     <>
+      <LoadingIndicator />
       <NavigationContainer>
         <DefaultStack />
       </NavigationContainer>

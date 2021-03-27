@@ -2,12 +2,10 @@ import React from 'react';
 import Practice from 'screen/practice';
 import Failed from 'screen/failed';
 import Success from 'screen/success';
-import WelcomeScreen from 'screen/welcome';
 import Battle from 'screen/battle';
 import ChooseTime from 'screen/chooseTime';
 import SelectMode from 'screen/selectMode';
 import { StackRoute } from 'constants/route';
-import SettingStack from './settingStack';
 import BottomStack from './bottomStack';
 import {
   CardStyleInterpolators,
