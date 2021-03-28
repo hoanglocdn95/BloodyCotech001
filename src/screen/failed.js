@@ -21,6 +21,7 @@ import { PlayIcon } from 'assets/icons/index';
 import { StackRoute } from 'constants/route';
 import AppID from 'constants/admob';
 import PracticeStore from 'stores/practiceStore';
+import AdmobStore from 'stores/admobStore';
 import LoadingStore from 'stores/loadingStore';
 import { useTranslation } from 'react-i18next';
 
@@ -41,31 +42,37 @@ export default function FailedScreen() {
   const { t } = useTranslation();
   const Navigate = useNavigation();
   const [isLoadAdMod, setLoadAdMob] = useState(false);
-
   useEffect(() => {
-    LoadingStore.setLoadingIndicator(true);
-    const eventListener = interstitialAd.onAdEvent(type => {
-      if (type === AdEventType.LOADED) {
-        setLoadAdMob(true);
-        LoadingStore.setLoadingIndicator(false);
-      }
-    });
-
-    // Start loading the interstitialAd straight away
-    interstitialAd.load();
-
-    // Unsubscribe from events on unmount
+    AdmobStore.showCurrentAD();
     return () => {
-      eventListener();
+      AdmobStore.unsubscribeAD();
     };
   }, []);
 
-  useEffect(() => {
-    if (isLoadAdMod) {
-      interstitialAd.show();
-      LoadingStore.setLoadingIndicator(false);
-    }
-  }, [isLoadAdMod]);
+  // useEffect(() => {
+  //   LoadingStore.setLoadingIndicator(true);
+  //   const eventListener = interstitialAd.onAdEvent(type => {
+  //     if (type === AdEventType.LOADED) {
+  //       setLoadAdMob(true);
+  //       LoadingStore.setLoadingIndicator(false);
+  //     }
+  //   });
+
+  //   // Start loading the interstitialAd straight away
+  //   interstitialAd.load();
+
+  //   // Unsubscribe from events on unmount
+  //   return () => {
+  //     eventListener();
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   if (isLoadAdMod) {
+  //     interstitialAd.show();
+  //     LoadingStore.setLoadingIndicator(false);
+  //   }
+  // }, [isLoadAdMod]);
 
   return (
     <View style={styles.container}>
