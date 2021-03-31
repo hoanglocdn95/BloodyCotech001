@@ -6,7 +6,7 @@ export const LanguageList = [
     languageCode: 'en',
   },
   {
-    title: 'Vietnamese',
+    title: 'Việt Nam',
     languageCode: 'vi',
   },
 ];

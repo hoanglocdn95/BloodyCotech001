@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
 import { colors, fonts, spaces } from 'constants/theme';
@@ -16,7 +15,6 @@ import Popup from 'component/Popup';
 
 import PracticeStore from 'stores/practiceStore';
 import CounterStore from 'stores/counterStore';
-import AdmobStore from 'stores/admobStore';
 import CountDown from 'react-native-countdown-component';
 
 const windowWidth = Dimensions.get('window').width;
@@ -30,13 +28,6 @@ const PracticeScreen = observer(() => {
   function randomNumber(to, from) {
     return Math.floor(Math.random() * from) + to;
   }
-
-  useEffect(() => {
-    AdmobStore.setCurrentAD();
-    AdmobStore.initAd();
-  }, []);
-
-  useFocusEffect(React.useCallback(() => {}, []));
 
   useEffect(() => {
     PracticeStore.setFirstParameter(randomNumber(1, 9));

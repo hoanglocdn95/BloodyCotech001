@@ -7,10 +7,12 @@ import { spaces, widthComponent, fonts } from 'constants/theme';
 import { StackRoute } from 'constants/route';
 import { useTranslation } from 'react-i18next';
 import rewardStore from 'stores/rewardStore';
+import Popup from 'component/Popup';
 
 const PointSection = props => {
   const { t } = useTranslation();
   const Navigate = useNavigation();
+  const [isShowModal, setShowModal] = React.useState(false);
 
   const goBackHome = () => {
     if (props.handleGoBack) {

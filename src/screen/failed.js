@@ -42,37 +42,31 @@ export default function FailedScreen() {
   const { t } = useTranslation();
   const Navigate = useNavigation();
   const [isLoadAdMod, setLoadAdMob] = useState(false);
+
   useEffect(() => {
-    AdmobStore.showCurrentAD();
+    LoadingStore.setLoadingIndicator(true);
+    const eventListener = interstitialAd.onAdEvent(type => {
+      if (type === AdEventType.LOADED) {
+        setLoadAdMob(true);
+        LoadingStore.setLoadingIndicator(false);
+      }
+    });
+
+    // Start loading the interstitialAd straight away
+    interstitialAd.load();
+
+    // Unsubscribe from events on unmount
     return () => {
-      AdmobStore.unsubscribeAD();
+      eventListener();
     };
   }, []);
 
-  // useEffect(() => {
-  //   LoadingStore.setLoadingIndicator(true);
-  //   const eventListener = interstitialAd.onAdEvent(type => {
-  //     if (type === AdEventType.LOADED) {
-  //       setLoadAdMob(true);
-  //       LoadingStore.setLoadingIndicator(false);
-  //     }
-  //   });
-
-  //   // Start loading the interstitialAd straight away
-  //   interstitialAd.load();
-
-  //   // Unsubscribe from events on unmount
-  //   return () => {
-  //     eventListener();
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   if (isLoadAdMod) {
-  //     interstitialAd.show();
-  //     LoadingStore.setLoadingIndicator(false);
-  //   }
-  // }, [isLoadAdMod]);
+  useEffect(() => {
+    if (isLoadAdMod) {
+      interstitialAd.show();
+      LoadingStore.setLoadingIndicator(false);
+    }
+  }, [isLoadAdMod]);
 
   return (
     <View style={styles.container}>

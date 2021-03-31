@@ -29,6 +29,9 @@ const English = {
     },
     profile: {
       title: 'Profile',
+      suggestSaveCoin:
+        'By press "Many a little makes a mickle", you can take more coins to reset difficulty calculations in practice mode or open new features in the future',
+      saveCoinButton: 'Many a little makes a mickle',
     },
   },
   arrPlayTime: {

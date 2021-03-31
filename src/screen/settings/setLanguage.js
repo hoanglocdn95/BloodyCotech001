@@ -1,16 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableHighlight,
-  Image,
-} from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
 import { colors, fonts, spaces, borderRadius } from 'constants/theme';
-import { useNavigation } from '@react-navigation/native';
-import { StackRoute } from 'constants/route';
 import { LanguageList } from 'constants/common';
 import Checkbox from 'component/Form/Checkbox';
 import i18n from 'i18next';
@@ -18,7 +10,6 @@ import { useTranslation } from 'react-i18next';
 
 const SetLanguageScreen = observer(() => {
   const { t } = useTranslation();
-  const Navigate = useNavigation();
 
   const renderListCheckbox = () => {
     return LanguageList.map((item, index) => {

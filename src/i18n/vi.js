@@ -29,6 +29,9 @@ const VietNam = {
     },
     profile: {
       title: 'Hồ sơ',
+      suggestSaveCoin:
+        'Bằng cách nhấn vào nút "Nâng nhặt chặt bị", bạn có thể tích trữ thêm các đồng xu để có thể reset lại phép tính khó trong chế độ thưc hành hoặc dành cho việc mở các tính năng mới trong tương lai',
+      saveCoinButton: 'Nâng nhặt chặt bị',
     },
   },
   arrPlayTime: {

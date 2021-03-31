@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import AppID from 'constants/admob';
 import rewardStore from 'stores/rewardStore';
+import CountDown from 'react-native-countdown-component';
 
 import {
   RewardedAd,
@@ -30,11 +31,9 @@ const ProfileScreen = observer(() => {
     const eventListener = rewardedAd.onAdEvent((type, error, reward) => {
       switch (type) {
         case RewardedAdEventType.LOADED:
-          console.log('file: LOADED ~ reward', reward);
           setLoadAdMob(true);
           break;
         case RewardedAdEventType.EARNED_REWARD:
-          console.log('file: EARNED_REWARD ~ reward', reward);
           rewardStore.setMineCoin(reward.amount);
           break;
         default:
@@ -55,11 +54,27 @@ const ProfileScreen = observer(() => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.styleTitle}> {t('settings.profile.title')}</Text>
+      <Text style={styles.styleTitle}>{t('settings.profile.title')}</Text>
+      <Text style={styles.description}>
+        {' '}
+        {t('settings.profile.suggestSaveCoin')}
+      </Text>
       <Button
+        style={styles.buttonSaveCoin}
         disabled={!isLoadAdMod}
         onPress={() => showReward()}
-        title="Test Reward"
+        title={t('settings.profile.saveCoinButton')}
+      />
+      <CountDown
+        id={'aa'}
+        until={30}
+        // onFinish={() => navigateToFailed()}
+        size={spaces.space4}
+        timeToShow={['S']}
+        timeLabels={{ s: '' }}
+        // digitStyle={styles.digitStyle}
+        // digitTxtStyle={styles.digitTextStyle}
+        // running={!isShowModal}
       />
     </View>
   );
@@ -81,5 +96,17 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
     textAlign: 'center',
+  },
+  description: {
+    color: colors.white,
+    fontSize: fonts.normal,
+    width: '90%',
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginVertical: spaces.space2,
+  },
+  buttonSaveCoin: {
+    borderRadius: borderRadius.medium,
+    padding: spaces.space2,
   },
 });
