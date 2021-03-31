@@ -1,24 +1,12 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableHighlight,
-  Image,
-  Button,
-} from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 
 import { colors, fonts, spaces, borderRadius } from 'constants/theme';
 import { useNavigation } from '@react-navigation/native';
-import { StackRoute } from 'constants/route';
-import { LanguageList } from 'constants/common';
-import { PlayIcon } from 'assets/icons/index';
-import Checkbox from 'component/Form/Checkbox';
 import { useTranslation } from 'react-i18next';
-import { getData } from 'utils/sensitiveInfo';
-import { MineCoinKey } from 'constants/common';
 import AppID from 'constants/admob';
+import rewardStore from 'stores/rewardStore';
 
 import {
   RewardedAd,
@@ -38,13 +26,8 @@ const ProfileScreen = observer(() => {
   const Navigate = useNavigation();
   const [isLoadAdMod, setLoadAdMob] = useState(false);
 
-  // useEffect(() => {
-  //   const value = getData(MineCoinKey);
-  //   console.log('useEffect ~ value', value);
-  // }, []);
   useEffect(() => {
     const eventListener = rewardedAd.onAdEvent((type, error, reward) => {
-      console.log('file: index.js ~ line 48 ~ eventListener ~ type', type);
       switch (type) {
         case RewardedAdEventType.LOADED:
           console.log('file: LOADED ~ reward', reward);
@@ -52,16 +35,14 @@ const ProfileScreen = observer(() => {
           break;
         case RewardedAdEventType.EARNED_REWARD:
           console.log('file: EARNED_REWARD ~ reward', reward);
+          rewardStore.setMineCoin(reward.amount);
           break;
         default:
           break;
       }
     });
 
-    // Start loading the rewarded ad straight away
     rewardedAd.load();
-
-    // Unsubscribe from events on unmount
     return () => {
       eventListener();
     };

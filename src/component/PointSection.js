@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { spaces, widthComponent, fonts } from 'constants/theme';
 import { StackRoute } from 'constants/route';
 import { useTranslation } from 'react-i18next';
+import rewardStore from 'stores/rewardStore';
 
 const PointSection = props => {
   const { t } = useTranslation();
@@ -16,6 +17,29 @@ const PointSection = props => {
       props.handleGoBack();
     }
     Navigate.navigate(StackRoute.Main.Welcome);
+  };
+
+  const handleButtonReset = () => {
+    rewardStore.setMineCoin(-1);
+    props.handleReset();
+  };
+
+  const renderResetButton = () => {
+    if (!props.handleReset) {
+      return null;
+    }
+    return (
+      <TouchableOpacity
+        onPress={
+          rewardStore.MineCoin === 0 ? () => {} : () => handleButtonReset()
+        }
+        style={styles.reset}>
+        <Image source={ResetIcon} style={[styles.icon, styles.resetIcon]} />
+        <Text style={styles.resetTime}>
+          {rewardStore.MineCoin > 99 ? 99 : rewardStore.MineCoin}
+        </Text>
+      </TouchableOpacity>
+    );
   };
 
   return (
@@ -29,11 +53,7 @@ const PointSection = props => {
         <Text style={styles.point}>
           {props.point} {t('component.pointSection.point')}
         </Text>
-        {props.handleReset && (
-          <TouchableOpacity onPress={() => props.handleReset()}>
-            <Image source={ResetIcon} style={styles.icon} />
-          </TouchableOpacity>
-        )}
+        {renderResetButton()}
       </View>
     </View>
   );
@@ -62,5 +82,20 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: fonts.header2,
     fontWeight: 'bold',
+  },
+  reset: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  resetTime: {
+    fontSize: widthComponent.iconHeader / 2.5,
+    color: '#fff',
+    fontWeight: 'bold',
+    width: widthComponent.iconHeader / 2,
+    textAlign: 'center',
+  },
+  resetIcon: {
+    position: 'absolute',
   },
 });

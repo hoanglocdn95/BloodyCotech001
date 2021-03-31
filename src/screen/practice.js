@@ -16,6 +16,7 @@ import Popup from 'component/Popup';
 
 import PracticeStore from 'stores/practiceStore';
 import CounterStore from 'stores/counterStore';
+import AdmobStore from 'stores/admobStore';
 import CountDown from 'react-native-countdown-component';
 
 const windowWidth = Dimensions.get('window').width;
@@ -29,6 +30,11 @@ const PracticeScreen = observer(() => {
   function randomNumber(to, from) {
     return Math.floor(Math.random() * from) + to;
   }
+
+  useEffect(() => {
+    AdmobStore.setCurrentAD();
+    AdmobStore.initAd();
+  }, []);
 
   useFocusEffect(React.useCallback(() => {}, []));
 
