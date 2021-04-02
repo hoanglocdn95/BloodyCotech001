@@ -38,6 +38,7 @@
     "react-native": "0.61.5",
     "react-native-cli": "^2.0.1",
     "react-native-countdown-component": "^2.7.1",
+    "react-native-device-info": "^8.0.8",
     "react-native-game-engine": "^1.2.0",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-localize": "^2.0.1",

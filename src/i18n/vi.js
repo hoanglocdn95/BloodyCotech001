@@ -29,6 +29,9 @@ const VietNam = {
     },
     profile: {
       title: 'Hồ sơ',
+      suggestSaveCoin:
+        'Nhấn vào nút "Nâng nhặt chặt bị", bạn có thể tích trữ thêm các đồng xu để có thể reset lại phép tính khó trong chế độ thưc hành hoặc dành cho việc mở các tính năng mới trong tương lai',
+      saveCoinButton: 'Nâng nhặt chặt bị',
     },
   },
   arrPlayTime: {
@@ -42,10 +45,14 @@ const VietNam = {
   component: {
     pointSection: {
       point: 'Điểm',
+      resetOut:
+        'Nếu bạn muốn đổi câu hỏi, bạn có thể đi tới Profile để kiếm đồng Mine. 1 đồng Mine cho 1 lần thay đổi',
     },
     button: {
       yes: 'Có',
       no: 'Không',
+      ok: 'Tôi đã hiểu',
+      read: 'Đã xem',
     },
   },
 };

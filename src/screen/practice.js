@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
 import { colors, fonts, spaces } from 'constants/theme';
@@ -12,12 +11,12 @@ import { ThresholdPeek, Right, Wrong } from 'constants/common';
 import WorkingSection from 'component/WorkingSection';
 import AnswerButton from 'component/AnswerButton';
 import PointSection from 'component/PointSection';
-import Popup from 'component/Popup';
 
 import PracticeStore from 'stores/practiceStore';
 import CounterStore from 'stores/counterStore';
-import AdmobStore from 'stores/admobStore';
+import PopupStore from 'stores/popupStore';
 import CountDown from 'react-native-countdown-component';
+import { TypePopup } from 'constants/common';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -25,18 +24,10 @@ const PracticeScreen = observer(() => {
   const { t } = useTranslation();
   const Navigate = useNavigation();
   const [result, setResult] = useState(PracticeStore.calculateResult());
-  const [isShowModal, setShowModal] = useState(false);
 
   function randomNumber(to, from) {
     return Math.floor(Math.random() * from) + to;
   }
-
-  useEffect(() => {
-    AdmobStore.setCurrentAD();
-    AdmobStore.initAd();
-  }, []);
-
-  useFocusEffect(React.useCallback(() => {}, []));
 
   useEffect(() => {
     PracticeStore.setFirstParameter(randomNumber(1, 9));
@@ -47,7 +38,13 @@ const PracticeScreen = observer(() => {
 
   useEffect(() => {
     if (PracticeStore.Point >= PracticeStore.ThresholdPoint) {
-      setShowModal(true);
+      PopupStore.togglePopup(true, {
+        type: TypePopup.QUESTION,
+        content: t('practice.popupChangeLevel'),
+        callbackYes: () => Navigate.goBack(),
+        callbackNo: () =>
+          PracticeStore.setThresholdPoint(PracticeStore.Point + ThresholdPeek),
+      });
     }
   }, [PracticeStore.point]);
 
@@ -76,14 +73,6 @@ const PracticeScreen = observer(() => {
     setResult(PracticeStore.calculateResult());
   };
 
-  const handleChangeLevel = () => {
-    Navigate.goBack();
-  };
-
-  const handleIgnoreChangeLevel = () => {
-    PracticeStore.setThresholdPoint(PracticeStore.Point + ThresholdPeek);
-  };
-
   const navigateToFailed = () => {
     return Navigate.navigate(StackRoute.Main.Failed);
   };
@@ -107,7 +96,7 @@ const PracticeScreen = observer(() => {
             timeLabels={{ s: '' }}
             digitStyle={styles.digitStyle}
             digitTxtStyle={styles.digitTextStyle}
-            running={!isShowModal}
+            running={!PopupStore.IsShow}
           />
         )}
         <View style={styles.body}>
@@ -122,13 +111,13 @@ const PracticeScreen = observer(() => {
           onWrongAnswer={() => pressAnswer(Wrong)}
         />
       </View>
-      <Popup
+      {/* <Popup
         isShowPopup={isShowModal}
         handleClosePopup={isShow => setShowModal(isShow)}
         handleYesButton={handleChangeLevel}
         handleNoButton={handleIgnoreChangeLevel}
         content={t('practice.popupChangeLevel')}
-      />
+      /> */}
     </>
   );
 });

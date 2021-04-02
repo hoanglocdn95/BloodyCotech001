@@ -7,6 +7,8 @@ import { spaces, widthComponent, fonts } from 'constants/theme';
 import { StackRoute } from 'constants/route';
 import { useTranslation } from 'react-i18next';
 import rewardStore from 'stores/rewardStore';
+import PopupStore from 'stores/popupStore';
+import { TypePopup } from 'constants/common';
 
 const PointSection = props => {
   const { t } = useTranslation();
@@ -20,8 +22,15 @@ const PointSection = props => {
   };
 
   const handleButtonReset = () => {
-    rewardStore.setMineCoin(-1);
-    props.handleReset();
+    if (rewardStore.MineCoin === 0) {
+      PopupStore.togglePopup(true, {
+        type: TypePopup.NOTICE,
+        content: t('component.pointSection.resetOut'),
+      });
+    } else {
+      rewardStore.setMineCoin(-1);
+      props.handleReset();
+    }
   };
 
   const renderResetButton = () => {

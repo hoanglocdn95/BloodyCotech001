@@ -1,62 +1,102 @@
+import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableHighlight, Text } from 'react-native';
 import { colors, fonts, spaces, borderRadius } from 'constants/theme';
 import Modal from 'react-native-modal';
 import { useTranslation } from 'react-i18next';
+import PopupStore from 'stores/popupStore';
+import { TypePopup } from 'constants/common';
 
-const Popup = props => {
-  const {
-    isShowPopup,
-    handleClosePopup,
-    handleYesButton,
-    handleNoButton,
-    content,
-  } = props;
+const Popup = observer(() => {
   const { t } = useTranslation();
-  const [isShowModal, setShowModal] = useState(false);
+  const {
+    IsShow,
+    Type,
+    Content,
+    CallbackYes,
+    CallbackNo,
+    togglePopup,
+  } = PopupStore;
 
-  useEffect(() => {
-    setShowModal(isShowPopup);
-  }, [isShowPopup]);
-
-  const onPressYesButton = () => {
-    handleClosePopup(false);
-    handleYesButton();
+  const handlePressYesButton = () => {
+    togglePopup(false, {});
+    CallbackYes();
   };
 
-  const onPressNoButton = () => {
-    handleClosePopup(false);
-    handleNoButton();
+  const handlePressNoButton = () => {
+    togglePopup(false, {});
+    CallbackNo();
+  };
+
+  const renderBody = (body, button) => {
+    return (
+      <View style={styles.container}>
+        <View style={styles.body}>{body}</View>
+        <View style={styles.footer}>{button}</View>
+      </View>
+    );
+  };
+
+  const renderContent = () => {
+    switch (Type) {
+      case TypePopup.CONFIRM:
+        return renderBody(
+          <Text style={styles.bodyText}>{Content}</Text>,
+          <TouchableHighlight
+            style={styles.buttonConfirm}
+            onPress={() => handlePressYesButton()}>
+            <Text style={styles.textStyle}>{t('component.button.ok')}</Text>
+          </TouchableHighlight>,
+        );
+      case TypePopup.QUESTION:
+        return renderBody(
+          <Text style={styles.bodyText}>{Content}</Text>,
+          <>
+            <TouchableHighlight
+              style={[styles.buttonFooter, styles.buttonLeft]}
+              onPress={() => handlePressYesButton()}>
+              <Text style={styles.textStyle}>{t('component.button.yes')}</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={[styles.buttonFooter, styles.buttonRight]}
+              onPress={() => handlePressNoButton()}>
+              <Text style={styles.textStyle}>{t('component.button.no')}</Text>
+            </TouchableHighlight>
+          </>,
+        );
+      case TypePopup.NOTICE:
+        return renderBody(
+          <Text style={styles.bodyText}>{Content}</Text>,
+          <TouchableHighlight
+            style={styles.buttonConfirm}
+            onPress={() => handlePressYesButton()}>
+            <Text style={styles.textStyle}>{t('component.button.read')}</Text>
+          </TouchableHighlight>,
+        );
+      default:
+        return renderBody(
+          <Text style={styles.bodyText}>{Content}</Text>,
+          <TouchableHighlight
+            style={styles.buttonConfirm}
+            onPress={() => handlePressYesButton()}>
+            <Text style={styles.textStyle}>{t('component.button.read')}</Text>
+          </TouchableHighlight>,
+        );
+    }
   };
 
   return (
     <Modal
       style={styles.modal}
-      isVisible={isShowModal}
+      isVisible={IsShow}
       animationIn="slideInUp"
       animationOut="slideOutDown"
       backdropOpacity={0.5}
-      onModalHide={() => handleClosePopup(false)}>
-      <View style={styles.container}>
-        <View style={styles.body}>
-          <Text style={styles.bodyText}>{content}</Text>
-        </View>
-        <View style={styles.footer}>
-          <TouchableHighlight
-            style={[styles.buttonFooter, styles.buttonLeft]}
-            onPress={() => onPressYesButton()}>
-            <Text style={styles.textStyle}>{t('component.button.yes')}</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={[styles.buttonFooter, styles.buttonRight]}
-            onPress={() => onPressNoButton()}>
-            <Text style={styles.textStyle}>{t('component.button.no')}</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+      onModalHide={() => togglePopup(false, {})}>
+      {renderContent()}
     </Modal>
   );
-};
+});
 
 export default Popup;
 
@@ -105,6 +145,15 @@ const styles = StyleSheet.create({
     borderLeftWidth: spaces.space0,
     borderBottomRightRadius: 10,
     borderLeftColor: 'transparent',
+  },
+  buttonConfirm: {
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+    padding: spaces.space2,
+    width: '100%',
   },
   textStyle: {
     fontWeight: 'bold',

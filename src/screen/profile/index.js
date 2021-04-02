@@ -1,24 +1,36 @@
+/* eslint-disable no-extra-boolean-cast */
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import {
+  TouchableHighlight,
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  Image,
+} from 'react-native';
 
 import { colors, fonts, spaces, borderRadius } from 'constants/theme';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { VideoIconWhite } from 'assets/icons/index';
 import AppID from 'constants/admob';
 import rewardStore from 'stores/rewardStore';
+import CountDown from 'react-native-countdown-component';
 
 import {
   RewardedAd,
   RewardedAdEventType,
   TestIds,
 } from '@react-native-firebase/admob';
+import DeviceInfo from 'react-native-device-info';
 
 const adRewardId = TestIds.REWARDED;
 // const adRewardId = AppID.interstitial.REWARD_1.id;
 
 const rewardedAd = RewardedAd.createForAdRequest(adRewardId, {
   requestNonPersonalizedAdsOnly: true,
+  testDevices: [DeviceInfo.getDeviceId()],
 });
 
 const ProfileScreen = observer(() => {
@@ -30,12 +42,11 @@ const ProfileScreen = observer(() => {
     const eventListener = rewardedAd.onAdEvent((type, error, reward) => {
       switch (type) {
         case RewardedAdEventType.LOADED:
-          console.log('file: LOADED ~ reward', reward);
           setLoadAdMob(true);
           break;
         case RewardedAdEventType.EARNED_REWARD:
-          console.log('file: EARNED_REWARD ~ reward', reward);
           rewardStore.setMineCoin(reward.amount);
+          rewardStore.getTimeToRewardLocalStorage();
           break;
         default:
           break;
@@ -49,17 +60,24 @@ const ProfileScreen = observer(() => {
   }, [isLoadAdMod]);
 
   const showReward = () => {
-    rewardedAd.show();
-    setLoadAdMob(false);
+    if (rewardedAd.show) {
+      rewardedAd.show();
+      setLoadAdMob(false);
+      rewardStore.setTimeToReward();
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.styleTitle}> {t('settings.profile.title')}</Text>
+      <Text style={styles.styleTitle}>{t('settings.profile.title')}</Text>
+      <Text style={styles.description}>
+        {t('settings.profile.suggestSaveCoin')}
+      </Text>
       <Button
+        style={styles.buttonSaveCoin}
         disabled={!isLoadAdMod}
         onPress={() => showReward()}
-        title="Test Reward"
+        title={t('settings.profile.saveCoinButton')}
       />
     </View>
   );
@@ -81,5 +99,17 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
     textAlign: 'center',
+  },
+  description: {
+    color: colors.white,
+    fontSize: fonts.normal,
+    width: '90%',
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginVertical: spaces.space2,
+  },
+  buttonSaveCoin: {
+    borderRadius: borderRadius.medium,
+    height: spaces.space7,
   },
 });

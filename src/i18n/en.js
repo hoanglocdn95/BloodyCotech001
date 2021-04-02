@@ -29,6 +29,9 @@ const English = {
     },
     profile: {
       title: 'Profile',
+      suggestSaveCoin:
+        'Pressing "Many a little makes a mickle", you can take more coins to reset difficult calculations in practice mode or open new features in the future',
+      saveCoinButton: 'Many a little makes a mickle',
     },
   },
   arrPlayTime: {
@@ -42,10 +45,14 @@ const English = {
   component: {
     pointSection: {
       point: 'Point',
+      resetOut:
+        'If you want to change the question, you can go to Profile and earn Mine Coin to use it to change. One coin per change.',
     },
     button: {
       yes: 'Yes',
       no: 'No',
+      ok: 'OK',
+      read: 'I understand',
     },
   },
 };
