@@ -5,13 +5,13 @@ export const StackRoute = {
     Bottom: 'BottomStack',
   },
   BottomTabs: {
-    Default: 'Home',
+    Default: 'HomeTab',
     Profile: 'Profile',
     Setting: 'Setting',
   },
   Main: {
     Splash: 'Splash',
-    Welcome: 'Welcome',
+    Welcome: 'Home',
     Practice: 'Practice',
     Learn: 'Learn',
     Battle: 'Battle',

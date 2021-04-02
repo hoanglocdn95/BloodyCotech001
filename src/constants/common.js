@@ -15,3 +15,10 @@ export const Right = 'right';
 export const Wrong = 'wrong';
 
 export const MineCoinKey = 'BloodyCotech';
+export const WaitingTimeWatchAdKey = 'WaitingTimeWatchAdKey';
+
+export const TypePopup = {
+  CONFIRM: 'confirm',
+  QUESTION: 'question',
+  NOTICE: 'notice',
+};

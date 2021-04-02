@@ -14,3 +14,4 @@ export const ProfileIcon = require('./icons8-male-user-96.png');
 export const ProfileIconWhite = require('./icons8-male-user-96-white.png');
 export const DefaultIcon = require('./icons8-circled-play-96.png');
 export const DefaultIconWhite = require('./icons8-circled-play-96-white.png');
+export const VideoIconWhite = require('./icons8-video-96-white.png');

@@ -1,10 +1,19 @@
+/* eslint-disable no-extra-boolean-cast */
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import {
+  TouchableHighlight,
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  Image,
+} from 'react-native';
 
 import { colors, fonts, spaces, borderRadius } from 'constants/theme';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { VideoIconWhite } from 'assets/icons/index';
 import AppID from 'constants/admob';
 import rewardStore from 'stores/rewardStore';
 import CountDown from 'react-native-countdown-component';
@@ -14,12 +23,14 @@ import {
   RewardedAdEventType,
   TestIds,
 } from '@react-native-firebase/admob';
+import DeviceInfo from 'react-native-device-info';
 
 const adRewardId = TestIds.REWARDED;
 // const adRewardId = AppID.interstitial.REWARD_1.id;
 
 const rewardedAd = RewardedAd.createForAdRequest(adRewardId, {
   requestNonPersonalizedAdsOnly: true,
+  testDevices: [DeviceInfo.getDeviceId()],
 });
 
 const ProfileScreen = observer(() => {
@@ -35,6 +46,7 @@ const ProfileScreen = observer(() => {
           break;
         case RewardedAdEventType.EARNED_REWARD:
           rewardStore.setMineCoin(reward.amount);
+          rewardStore.getTimeToRewardLocalStorage();
           break;
         default:
           break;
@@ -48,15 +60,17 @@ const ProfileScreen = observer(() => {
   }, [isLoadAdMod]);
 
   const showReward = () => {
-    rewardedAd.show();
-    setLoadAdMob(false);
+    if (rewardedAd.show) {
+      rewardedAd.show();
+      setLoadAdMob(false);
+      rewardStore.setTimeToReward();
+    }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.styleTitle}>{t('settings.profile.title')}</Text>
       <Text style={styles.description}>
-        {' '}
         {t('settings.profile.suggestSaveCoin')}
       </Text>
       <Button
@@ -64,17 +78,6 @@ const ProfileScreen = observer(() => {
         disabled={!isLoadAdMod}
         onPress={() => showReward()}
         title={t('settings.profile.saveCoinButton')}
-      />
-      <CountDown
-        id={'aa'}
-        until={30}
-        // onFinish={() => navigateToFailed()}
-        size={spaces.space4}
-        timeToShow={['S']}
-        timeLabels={{ s: '' }}
-        // digitStyle={styles.digitStyle}
-        // digitTxtStyle={styles.digitTextStyle}
-        // running={!isShowModal}
       />
     </View>
   );
@@ -107,6 +110,6 @@ const styles = StyleSheet.create({
   },
   buttonSaveCoin: {
     borderRadius: borderRadius.medium,
-    padding: spaces.space2,
+    height: spaces.space7,
   },
 });
