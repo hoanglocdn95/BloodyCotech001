@@ -21,7 +21,6 @@ import { PlayIcon } from 'assets/icons/index';
 import { StackRoute } from 'constants/route';
 import AppID from 'constants/admob';
 import PracticeStore from 'stores/practiceStore';
-import AdmobStore from 'stores/admobStore';
 import LoadingStore from 'stores/loadingStore';
 import { useTranslation } from 'react-i18next';
 
@@ -31,8 +30,8 @@ import {
   TestIds,
 } from '@react-native-firebase/admob';
 
-const adUnitId = TestIds.INTERSTITIAL;
-// const adUnitId = AppID.interstitial.FAILED_SCREEN.id;
+// const adUnitId = TestIds.INTERSTITIAL;
+const adUnitId = AppID.interstitial.FAILED_SCREEN.id;
 
 const interstitialAd = InterstitialAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,

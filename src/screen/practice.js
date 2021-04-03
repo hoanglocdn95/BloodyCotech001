@@ -111,13 +111,6 @@ const PracticeScreen = observer(() => {
           onWrongAnswer={() => pressAnswer(Wrong)}
         />
       </View>
-      {/* <Popup
-        isShowPopup={isShowModal}
-        handleClosePopup={isShow => setShowModal(isShow)}
-        handleYesButton={handleChangeLevel}
-        handleNoButton={handleIgnoreChangeLevel}
-        content={t('practice.popupChangeLevel')}
-      /> */}
     </>
   );
 });

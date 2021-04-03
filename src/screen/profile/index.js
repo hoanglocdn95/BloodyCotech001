@@ -7,16 +7,12 @@ import {
   View,
   Text,
   Button,
-  Image,
 } from 'react-native';
 
 import { colors, fonts, spaces, borderRadius } from 'constants/theme';
-import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-import { VideoIconWhite } from 'assets/icons/index';
 import AppID from 'constants/admob';
 import rewardStore from 'stores/rewardStore';
-import CountDown from 'react-native-countdown-component';
 
 import {
   RewardedAd,
@@ -25,8 +21,8 @@ import {
 } from '@react-native-firebase/admob';
 import DeviceInfo from 'react-native-device-info';
 
-const adRewardId = TestIds.REWARDED;
-// const adRewardId = AppID.interstitial.REWARD_1.id;
+// const adRewardId = TestIds.REWARDED;
+const adRewardId = AppID.interstitial.REWARD_1.id;
 
 const rewardedAd = RewardedAd.createForAdRequest(adRewardId, {
   requestNonPersonalizedAdsOnly: true,
@@ -35,7 +31,6 @@ const rewardedAd = RewardedAd.createForAdRequest(adRewardId, {
 
 const ProfileScreen = observer(() => {
   const { t } = useTranslation();
-  const Navigate = useNavigation();
   const [isLoadAdMod, setLoadAdMob] = useState(false);
 
   useEffect(() => {
