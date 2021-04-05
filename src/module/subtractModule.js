@@ -1,10 +1,11 @@
 import EquationModule from './equationModule';
 
-class AddModule extends EquationModule {
+class SubtractModule extends EquationModule {
   init = (min, max) => {
     this.initEquation(min, max);
     this.setResult(this.firstParameter + this.secondParameter);
     this.calculateResultParameter();
+    this.exchangeParamter();
   };
 
   returnValue = () => {
@@ -17,5 +18,5 @@ class AddModule extends EquationModule {
   };
 }
 
-const addModule = new AddModule();
-export default addModule;
+const subtractModule = new SubtractModule();
+export default subtractModule;

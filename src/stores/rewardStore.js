@@ -9,7 +9,7 @@ class RewardStore {
 
   @action async getCoinLocalStorage() {
     const coin = await getData(MineCoinKey);
-    if (coin) {
+    if (coin || coin === 0) {
       this.mineCoin = parseInt(coin);
     }
   }

@@ -40,7 +40,7 @@ const ProfileScreen = observer(() => {
           setLoadAdMob(true);
           break;
         case RewardedAdEventType.EARNED_REWARD:
-          rewardStore.setMineCoin(reward.amount);
+          rewardStore.setMineCoin(1);
           rewardStore.getTimeToRewardLocalStorage();
           break;
         default:

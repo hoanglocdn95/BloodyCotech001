@@ -1,18 +1,29 @@
 import { observable, action, computed } from 'mobx';
+import addModule from 'module/addModule';
+import { TypeEquation } from 'constants/common';
 
 class PracticeStore {
   @observable firstParameter = 0;
   @observable secondParameter = 0;
-  @observable isCorrect = true;
+  @observable resultParameter = 0;
+  @observable correctResult = 0;
   @observable point = 0;
   @observable playTime = 0;
   @observable thresholdPoint = 0;
+  @observable typeEquation = TypeEquation.ADDITION;
 
-  @action setFirstParameter(item) {
-    this.firstParameter = item;
-  }
-  @action setSecondParameter(item) {
-    this.secondParameter = item;
+  @action getValue() {
+    addModule.init(1, 9);
+    const {
+      firstParameter,
+      secondParameter,
+      resultParameter,
+      correctResult,
+    } = addModule.returnValue();
+    this.firstParameter = firstParameter;
+    this.secondParameter = secondParameter;
+    this.resultParameter = resultParameter;
+    this.correctResult = correctResult;
   }
 
   @action setPoint(point) {
@@ -27,10 +38,15 @@ class PracticeStore {
     this.thresholdPoint = thresholdPoint;
   }
 
+  @action setTypeEquation(type) {
+    this.typeEquation = type;
+  }
+
   @action reset() {
     this.firstParameter = 0;
     this.secondParameter = 0;
-    this.isCorrect = true;
+    this.resultParameter = 0;
+    this.correctResult = 0;
     this.point = 0;
     this.playTime = 0;
     this.thresholdPoint = 0;
@@ -43,8 +59,11 @@ class PracticeStore {
     return this.secondParameter;
   }
 
-  @computed get IsCorrect() {
-    return this.isCorrect;
+  @computed get ResultParameter() {
+    return this.resultParameter;
+  }
+  @computed get CorrectResult() {
+    return this.correctResult;
   }
 
   @computed get Point() {
@@ -59,30 +78,13 @@ class PracticeStore {
     return this.thresholdPoint;
   }
 
-  randomNumber = (to, from) => {
-    return Math.floor(Math.random() * from) + to;
-  };
+  @computed get TrueAnswer() {
+    return addModule.trueAnswer;
+  }
 
-  calculateResult = () => {
-    const isTrue = Math.floor(Math.random() * 4);
-    if (isTrue === 0) {
-      return this.firstParameter + this.secondParameter;
-    }
-    const isBigger = Math.floor(Math.random() * 4);
-    let resultFalse = 0;
-    if (isBigger === 0) {
-      resultFalse =
-        this.firstParameter +
-        this.secondParameter +
-        Math.floor(Math.random() * 2);
-    } else {
-      resultFalse =
-        this.firstParameter +
-        this.secondParameter -
-        Math.floor(Math.random() * 2);
-    }
-    return resultFalse < 0 ? 0 : resultFalse;
-  };
+  @computed get TypeEquation() {
+    return this.typeEquation;
+  }
 }
 
 const practiceStore = new PracticeStore();

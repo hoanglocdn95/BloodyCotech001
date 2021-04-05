@@ -22,3 +22,10 @@ export const TypePopup = {
   QUESTION: 'question',
   NOTICE: 'notice',
 };
+
+export const TypeEquation = {
+  ADDITION: '+',
+  SUBTRACT: '-',
+  MULTIPLE: 'x',
+  DIVISION: ':',
+};
