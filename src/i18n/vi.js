@@ -7,6 +7,7 @@ const VietNam = {
     chooseMode: 'Chọn chế độ bạn muốn',
     practice: 'Thực hành',
     battle: 'So tài',
+    chooseOperator: 'Chọn phép tính bạn muốn',
   },
   chooseTime: {
     chooseYourTime: 'Chọn thời gian chơi',
@@ -29,6 +30,7 @@ const VietNam = {
     },
     profile: {
       title: 'Hồ sơ',
+      amountCoins: 'Xu của bạn: ',
       suggestSaveCoin:
         'Nhấn vào nút "Nâng nhặt chặt bị", bạn có thể tích trữ thêm các đồng xu để có thể reset lại phép tính khó trong chế độ thưc hành hoặc dành cho việc mở các tính năng mới trong tương lai',
       saveCoinButton: 'Nâng nhặt chặt bị',
@@ -41,6 +43,12 @@ const VietNam = {
     highJunior: 'Phổ thông',
     adult: '18+',
     easyGame: 'Game là dễ',
+  },
+  operator: {
+    addition: 'Phép Cộng (+)',
+    subtraction: 'Phép Trừ (-)',
+    multiplication: 'Phép Nhân (x)',
+    division: 'Phép Chia (:)',
   },
   component: {
     pointSection: {

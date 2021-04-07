@@ -9,17 +9,74 @@ import {
 } from 'react-native';
 
 import { colors, fonts, spaces, borderRadius } from 'constants/theme';
+import { TypeEquation } from 'constants/common';
 import { useNavigation } from '@react-navigation/native';
 import { StackRoute } from 'constants/route';
 import { BattleIcon, PracticeIcon } from 'assets/icons/index';
 import { useTranslation } from 'react-i18next';
+import PracticeStore from 'stores/practiceStore';
+import rewardStore from 'stores/rewardStore';
 
 const SelectModeScreen = observer(() => {
   const { t } = useTranslation();
   const Navigate = useNavigation();
+  const {
+    IsSubtractAvailable,
+    IsMultiAvailable,
+    IsDivideAvailable,
+  } = rewardStore;
+  const chooseOperator = [
+    {
+      type: TypeEquation.ADDITION,
+      description: t('operator.addition'),
+    },
+    {
+      type: IsSubtractAvailable ? TypeEquation.SUBTRACTION : '',
+      description: t('operator.subtraction'),
+    },
+    {
+      type: IsMultiAvailable ? TypeEquation.MULTIPLICATION : '',
+      description: t('operator.multiplication'),
+    },
+    {
+      type: IsDivideAvailable ? TypeEquation.DIVISION : '',
+      description: t('operator.division'),
+    },
+  ];
+
+  const renderListCheckbox = () => {
+    return chooseOperator.map((item, index) => {
+      if (item.type === '') {
+        return null;
+      }
+      return (
+        <TouchableHighlight
+          key={`${item.type}_${index}`}
+          style={styles.buttonCalculation}
+          onPress={() => PracticeStore.setOperator(item.type)}>
+          <Text
+            style={[
+              styles.buttonText,
+              PracticeStore.Operator === item.type ? styles.textActive : {},
+            ]}>
+            {item.description}
+          </Text>
+        </TouchableHighlight>
+      );
+    });
+  };
 
   return (
     <View style={styles.container}>
+      {IsSubtractAvailable || IsMultiAvailable || IsDivideAvailable ? (
+        <>
+          <Text style={styles.styleTitle}>
+            {t('selectMode.chooseOperator')}
+          </Text>
+          <View style={styles.containerList}>{renderListCheckbox()}</View>
+        </>
+      ) : null}
+
       <Text style={styles.styleTitle}>{t('selectMode.chooseMode')}</Text>
       <View style={styles.containerButton}>
         <TouchableHighlight
@@ -72,5 +129,32 @@ const styles = StyleSheet.create({
   icon: {
     width: spaces.imageIcon,
     height: spaces.imageIcon,
+  },
+  containerList: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: spaces.space1,
+    marginBottom: spaces.space2,
+  },
+  buttonCalculation: {
+    width: spaces.buttonOperator,
+    marginTop: spaces.space2,
+    backgroundColor: colors.white,
+    borderRadius: borderRadius.header,
+  },
+  buttonText: {
+    textTransform: 'uppercase',
+    color: colors.text,
+    fontSize: fonts.medium,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    flexWrap: 'nowrap',
+    paddingVertical: spaces.space1,
+    paddingHorizontal: spaces.space3,
+    borderRadius: borderRadius.header,
+  },
+  textActive: {
+    backgroundColor: colors.bg_secondary,
+    color: colors.white,
   },
 });

@@ -1,5 +1,8 @@
 import { observable, action, computed } from 'mobx';
 import addModule from 'module/addModule';
+import subtractModule from 'module/subtractModule';
+import multiModule from 'module/multiModule';
+import divideModule from 'module/divideModule';
 import { TypeEquation } from 'constants/common';
 
 class PracticeStore {
@@ -10,16 +13,34 @@ class PracticeStore {
   @observable point = 0;
   @observable playTime = 0;
   @observable thresholdPoint = 0;
-  @observable typeEquation = TypeEquation.ADDITION;
+  @observable moduleSelected = addModule;
+  @observable operator = TypeEquation.ADDITION;
 
   @action getValue() {
-    addModule.init(1, 9);
+    switch (this.operator) {
+      case TypeEquation.ADDITION:
+        this.moduleSelected = addModule;
+        break;
+      case TypeEquation.SUBTRACTION:
+        this.moduleSelected = subtractModule;
+        break;
+      case TypeEquation.MULTIPLICATION:
+        this.moduleSelected = multiModule;
+        break;
+      case TypeEquation.DIVISION:
+        this.moduleSelected = divideModule;
+        break;
+      default:
+        this.moduleSelected = addModule;
+        break;
+    }
+    this.moduleSelected.init(1, 9);
     const {
       firstParameter,
       secondParameter,
       resultParameter,
       correctResult,
-    } = addModule.returnValue();
+    } = this.moduleSelected.returnValue();
     this.firstParameter = firstParameter;
     this.secondParameter = secondParameter;
     this.resultParameter = resultParameter;
@@ -38,8 +59,8 @@ class PracticeStore {
     this.thresholdPoint = thresholdPoint;
   }
 
-  @action setTypeEquation(type) {
-    this.typeEquation = type;
+  @action setOperator(operator) {
+    this.operator = operator;
   }
 
   @action reset() {
@@ -79,7 +100,11 @@ class PracticeStore {
   }
 
   @computed get TrueAnswer() {
-    return addModule.trueAnswer;
+    return this.moduleSelected.trueAnswer;
+  }
+
+  @computed get Operator() {
+    return this.operator;
   }
 
   @computed get TypeEquation() {

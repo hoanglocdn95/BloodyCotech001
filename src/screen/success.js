@@ -115,10 +115,10 @@ const styles = StyleSheet.create({
   styleTitle: {
     textTransform: 'uppercase',
     color: colors.text,
+    textAlign: 'center',
   },
   title1: {
     fontSize: fonts.header1,
-    marginRight: spaces.space2,
   },
   title2: {
     fontSize: fonts.header4,

@@ -1,10 +1,17 @@
 import { observable, action, computed } from 'mobx';
-import { MineCoinKey, WaitingTimeWatchAdKey } from 'constants/common';
+import {
+  MineCoinKey,
+  WaitingTimeWatchAdKey,
+  CalculationKey,
+} from 'constants/common';
 import { getData, setData } from 'utils/sensitiveInfo';
 
 class RewardStore {
   @observable mineCoin = 0;
   @observable timeToReward = 0;
+  @observable isSubtractAvailable = 0;
+  @observable isMultiAvailable = 0;
+  @observable isDivideAvailable = 0;
   countTime = 60;
 
   @action async getCoinLocalStorage() {
@@ -14,10 +21,30 @@ class RewardStore {
     }
   }
 
+  @action async getModeLocalStorage() {
+    const SUBTRACTION = await getData(CalculationKey.SUBTRACTION);
+    const MULTIPLICATION = await getData(CalculationKey.MULTIPLICATION);
+    const DIVISION = await getData(CalculationKey.DIVISION);
+    if (SUBTRACTION) {
+      this.isSubtractAvailable = parseInt(SUBTRACTION);
+    }
+    if (MULTIPLICATION) {
+      this.isMultiAvailable = parseInt(MULTIPLICATION);
+    }
+    if (DIVISION) {
+      this.isDivideAvailable = parseInt(DIVISION);
+    }
+  }
+
   @action async setMineCoin(amount) {
     const value = this.mineCoin + amount;
     await setData(MineCoinKey, value);
     this.getCoinLocalStorage();
+  }
+
+  @action async unlockMode(keyName) {
+    await setData(keyName, 1);
+    this.getModeLocalStorage();
   }
 
   @action async getTimeToRewardLocalStorage() {
@@ -41,6 +68,15 @@ class RewardStore {
 
   @computed get TimeToReward() {
     return this.timeToReward;
+  }
+  @computed get IsSubtractAvailable() {
+    return this.isSubtractAvailable;
+  }
+  @computed get IsMultiAvailable() {
+    return this.isMultiAvailable;
+  }
+  @computed get IsDivideAvailable() {
+    return this.isDivideAvailable;
   }
 }
 

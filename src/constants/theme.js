@@ -17,6 +17,7 @@ const sizeObject = {
   imageContainer: space0 * 35,
   imageBrand: space0 * 62.5,
   buttonAnswer: space0 * 22.5,
+  buttonOperator: windowWidth / 1.5,
 };
 
 export const fonts = {

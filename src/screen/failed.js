@@ -23,6 +23,7 @@ import AppID from 'constants/admob';
 import PracticeStore from 'stores/practiceStore';
 import LoadingStore from 'stores/loadingStore';
 import { useTranslation } from 'react-i18next';
+import { TypeEquation } from 'constants/common';
 
 import {
   InterstitialAd,
@@ -67,6 +68,57 @@ export default function FailedScreen() {
     }
   }, [isLoadAdMod]);
 
+  const renderWorkingSection = () => {
+    switch (PracticeStore.Operator) {
+      case TypeEquation.ADDITION:
+        return (
+          <WorkingSection
+            firstParameter={PracticeStore.FirstParameter}
+            secondParameter={PracticeStore.SecondParameter}
+            result={
+              PracticeStore.FirstParameter + PracticeStore.SecondParameter
+            }
+            operator={PracticeStore.Operator}
+            isCorrect
+          />
+        );
+      case TypeEquation.MULTIPLICATION:
+        return (
+          <WorkingSection
+            firstParameter={PracticeStore.FirstParameter}
+            secondParameter={PracticeStore.SecondParameter}
+            result={
+              PracticeStore.FirstParameter * PracticeStore.SecondParameter
+            }
+            operator={PracticeStore.Operator}
+            isCorrect
+          />
+        );
+      case TypeEquation.SUBTRACTION:
+        return (
+          <WorkingSection
+            firstParameter={PracticeStore.CorrectResult}
+            secondParameter={PracticeStore.SecondParameter}
+            result={PracticeStore.ResultParameter}
+            operator={PracticeStore.Operator}
+            isCorrect
+          />
+        );
+      case TypeEquation.DIVISION:
+        return (
+          <WorkingSection
+            firstParameter={PracticeStore.CorrectResult}
+            secondParameter={PracticeStore.SecondParameter}
+            result={PracticeStore.ResultParameter}
+            operator={PracticeStore.Operator}
+            isCorrect
+          />
+        );
+      default:
+        return;
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -77,12 +129,7 @@ export default function FailedScreen() {
           {t('welcome.title2')}
         </Text>
       </View>
-      <WorkingSection
-        firstParameter={PracticeStore.FirstParameter}
-        secondParameter={PracticeStore.SecondParameter}
-        result={PracticeStore.FirstParameter + PracticeStore.SecondParameter}
-        isCorrect
-      />
+      {renderWorkingSection()}
       <View style={styles.pointContainer}>
         <Text style={styles.pointText}>{t('failed.point')}</Text>
         <Text style={styles.pointText}>{PracticeStore.Point}</Text>

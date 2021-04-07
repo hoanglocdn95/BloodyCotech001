@@ -32,6 +32,7 @@ export default class EquationModule {
     if (isTrue === 0) {
       this.resultParameter = this.correctResult;
       this.trueAnswer = Right;
+      console.log('EquationModule ~ this.trueAnswer 1', this.trueAnswer);
     } else {
       const isBigger = Math.floor(Math.random() * 2);
       const spaceRand = Math.floor(Math.random() * 5) + 1;
@@ -41,6 +42,11 @@ export default class EquationModule {
         this.resultParameter = this.correctResult - spaceRand;
       }
       this.trueAnswer = Wrong;
+      console.log('EquationModule ~ this.trueAnswer 2', this.trueAnswer);
     }
+    console.log('EquationModule ~ this.firstParameter', this.firstParameter);
+    console.log('EquationModule ~ this.secondParameter', this.secondParameter);
+    console.log('EquationModule ~ this.correctResult', this.correctResult);
+    console.log('EquationModule ~ this.resultParameter', this.resultParameter);
   };
 }

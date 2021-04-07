@@ -7,6 +7,7 @@ const English = {
     chooseMode: 'Select mode you want',
     practice: 'practice',
     battle: 'battle',
+    chooseOperator: 'Choose the calculation you want',
   },
   chooseTime: {
     chooseYourTime: 'Choose your play time',
@@ -29,6 +30,7 @@ const English = {
     },
     profile: {
       title: 'Profile',
+      amountCoins: 'Your coins: ',
       suggestSaveCoin:
         'Pressing "Many a little makes a mickle", you can take more coins to reset difficult calculations in practice mode or open new features in the future',
       saveCoinButton: 'Many a little makes a mickle',
@@ -41,6 +43,12 @@ const English = {
     highJunior: 'High Junior',
     adult: '18+',
     easyGame: 'Game is easy',
+  },
+  operator: {
+    addition: 'Addition (+)',
+    subtraction: 'Subtraction (-)',
+    multiplication: 'Multiplication (x)',
+    division: 'Division (:)',
   },
   component: {
     pointSection: {

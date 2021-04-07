@@ -11,6 +11,7 @@ const WorkingSection = props => {
     result,
     isCorrect,
     fontSize,
+    operator,
   } = props;
   const fadeAnim = new Animated.Value(0);
   const rotateY360deg = new Animated.Value(0);
@@ -43,7 +44,7 @@ const WorkingSection = props => {
     <View style={styles.expressionContainer}>
       <View style={styles.numberContainer}>
         <Text style={[styles.number, fontSize && { fontSize: fontSize }]}>
-          {`${firstParameter} ${PracticeStore.TypeEquation} ${secondParameter}`}
+          {`${firstParameter} ${operator} ${secondParameter}`}
         </Text>
         <Text style={[styles.number, fontSize && { fontSize: fontSize }]}>
           = {result}

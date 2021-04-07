@@ -25,7 +25,13 @@ export const TypePopup = {
 
 export const TypeEquation = {
   ADDITION: '+',
-  SUBTRACT: '-',
-  MULTIPLE: 'x',
+  SUBTRACTION: '-',
+  MULTIPLICATION: 'x',
   DIVISION: ':',
+};
+
+export const CalculationKey = {
+  SUBTRACTION: 'SUBTRACTION',
+  MULTIPLICATION: 'MULTIPLICATION',
+  DIVISION: 'DIVISION',
 };

@@ -1,8 +1,17 @@
 import { observable, action, computed } from 'mobx';
+import addModule from 'module/addModule';
+import subtractModule from 'module/subtractModule';
+import multiModule from 'module/multiModule';
+import divideModule from 'module/divideModule';
+import { TypeEquation } from 'constants/common';
 
 class BattleStore {
   @observable firstParameter = 0;
   @observable secondParameter = 0;
+  @observable resultParameter = 0;
+  @observable correctResult = 0;
+  @observable moduleSelected = addModule;
+  @observable operator = TypeEquation.ADDITION;
   @observable player1 = {
     point: 0,
   };
@@ -10,27 +19,46 @@ class BattleStore {
     point: 0,
   };
 
-  @action setFirstParameter(item) {
-    this.firstParameter = item;
-  }
-  @action setSecondParameter(item) {
-    this.secondParameter = item;
+  @action getValue() {
+    switch (this.operator) {
+      case TypeEquation.ADDITION:
+        this.moduleSelected = addModule;
+        break;
+      case TypeEquation.SUBTRACTION:
+        this.moduleSelected = subtractModule;
+        break;
+      case TypeEquation.MULTIPLICATION:
+        this.moduleSelected = multiModule;
+        break;
+      case TypeEquation.DIVISION:
+        this.moduleSelected = divideModule;
+        break;
+      default:
+        this.moduleSelected = addModule;
+        break;
+    }
+    this.moduleSelected.init(1, 9);
+    const {
+      firstParameter,
+      secondParameter,
+      resultParameter,
+      correctResult,
+    } = this.moduleSelected.returnValue();
+    this.firstParameter = firstParameter;
+    this.secondParameter = secondParameter;
+    this.resultParameter = resultParameter;
+    this.correctResult = correctResult;
   }
 
   @action setPoint(point, player) {
     this[`player${player}`].point = point;
   }
 
-  @computed get FirstParameter() {
-    return this.firstParameter;
-  }
-  @computed get SecondParameter() {
-    return this.secondParameter;
-  }
-
   @action reset() {
     this.firstParameter = 0;
     this.secondParameter = 0;
+    this.resultParameter = 0;
+    this.correctResult = 0;
     this.player1 = {
       point: 0,
     };
@@ -39,30 +67,29 @@ class BattleStore {
     };
   }
 
-  randomNumber = (to, from) => {
-    return Math.floor(Math.random() * from) + to;
-  };
+  @computed get FirstParameter() {
+    return this.firstParameter;
+  }
 
-  calculateResult = () => {
-    const isTrue = Math.floor(Math.random() * 4);
-    if (isTrue === 0) {
-      return this.firstParameter + this.secondParameter;
-    }
-    const isBigger = Math.floor(Math.random() * 4);
-    let resultFalse = 0;
-    if (isBigger === 0) {
-      resultFalse =
-        this.firstParameter +
-        this.secondParameter +
-        Math.floor(Math.random() * 2);
-    } else {
-      resultFalse =
-        this.firstParameter +
-        this.secondParameter -
-        Math.floor(Math.random() * 2);
-    }
-    return resultFalse < 0 ? 0 : resultFalse;
-  };
+  @computed get SecondParameter() {
+    return this.secondParameter;
+  }
+
+  @computed get ResultParameter() {
+    return this.resultParameter;
+  }
+
+  @computed get CorrectResult() {
+    return this.correctResult;
+  }
+
+  @computed get TrueAnswer() {
+    return this.moduleSelected.trueAnswer;
+  }
+
+  @computed get Operator() {
+    return this.operator;
+  }
 }
 
 const battleStore = new BattleStore();

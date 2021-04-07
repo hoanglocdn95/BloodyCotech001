@@ -89,6 +89,7 @@ const PracticeScreen = observer(() => {
             firstParameter={PracticeStore.FirstParameter}
             secondParameter={PracticeStore.SecondParameter}
             result={PracticeStore.ResultParameter}
+            operator={PracticeStore.Operator}
           />
         </View>
         <AnswerButton
