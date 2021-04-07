@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -23,17 +23,10 @@ const windowWidth = Dimensions.get('window').width;
 const PracticeScreen = observer(() => {
   const { t } = useTranslation();
   const Navigate = useNavigation();
-  const [result, setResult] = useState(PracticeStore.calculateResult());
-
-  function randomNumber(to, from) {
-    return Math.floor(Math.random() * from) + to;
-  }
 
   useEffect(() => {
-    PracticeStore.setFirstParameter(randomNumber(1, 9));
-    PracticeStore.setSecondParameter(randomNumber(1, 9));
+    PracticeStore.getValue();
     PracticeStore.setThresholdPoint(PracticeStore.Point + ThresholdPeek);
-    setResult(PracticeStore.calculateResult());
   }, []);
 
   useEffect(() => {
@@ -49,17 +42,11 @@ const PracticeScreen = observer(() => {
   }, [PracticeStore.point]);
 
   const pressAnswer = type => {
-    const isTrue =
-      PracticeStore.FirstParameter + PracticeStore.SecondParameter === result;
     CounterStore.reset();
-
-    if ((type === Wrong && isTrue) || (type === Right && !isTrue)) {
+    if (type !== PracticeStore.TrueAnswer) {
       return navigateToFailed();
-    }
-    if ((type === Wrong && !isTrue) || (type === Right && isTrue)) {
-      PracticeStore.setFirstParameter(randomNumber(1, 9));
-      PracticeStore.setSecondParameter(randomNumber(1, 9));
-      setResult(PracticeStore.calculateResult());
+    } else {
+      PracticeStore.getValue();
       return PracticeStore.setPoint(PracticeStore.Point + 1);
     }
   };
@@ -68,9 +55,7 @@ const PracticeScreen = observer(() => {
     if (isResetPoint) {
       PracticeStore.setPoint(0);
     }
-    PracticeStore.setFirstParameter(PracticeStore.randomNumber(1, 9));
-    PracticeStore.setSecondParameter(PracticeStore.randomNumber(1, 9));
-    setResult(PracticeStore.calculateResult());
+    PracticeStore.getValue();
   };
 
   const navigateToFailed = () => {
@@ -103,7 +88,7 @@ const PracticeScreen = observer(() => {
           <WorkingSection
             firstParameter={PracticeStore.FirstParameter}
             secondParameter={PracticeStore.SecondParameter}
-            result={result}
+            result={PracticeStore.ResultParameter}
           />
         </View>
         <AnswerButton

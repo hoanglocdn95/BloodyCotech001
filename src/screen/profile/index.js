@@ -21,8 +21,8 @@ import {
 } from '@react-native-firebase/admob';
 import DeviceInfo from 'react-native-device-info';
 
-const adRewardId = TestIds.REWARDED;
-// const adRewardId = AppID.interstitial.REWARD_1.id;
+// const adRewardId = TestIds.REWARDED;
+const adRewardId = AppID.interstitial.REWARD_1.id;
 
 const rewardedAd = RewardedAd.createForAdRequest(adRewardId, {
   requestNonPersonalizedAdsOnly: true,
@@ -40,7 +40,7 @@ const ProfileScreen = observer(() => {
           setLoadAdMob(true);
           break;
         case RewardedAdEventType.EARNED_REWARD:
-          rewardStore.setMineCoin(reward.amount);
+          rewardStore.setMineCoin(1);
           rewardStore.getTimeToRewardLocalStorage();
           break;
         default:

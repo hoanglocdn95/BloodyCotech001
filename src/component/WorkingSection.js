@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { View, StyleSheet, Text, Animated } from 'react-native';
 import { colors, fonts, spaces } from 'constants/theme';
+import PracticeStore from 'stores/practiceStore';
 
 const WorkingSection = props => {
   const {
@@ -42,7 +43,7 @@ const WorkingSection = props => {
     <View style={styles.expressionContainer}>
       <View style={styles.numberContainer}>
         <Text style={[styles.number, fontSize && { fontSize: fontSize }]}>
-          {firstParameter} + {secondParameter}
+          {`${firstParameter} ${PracticeStore.TypeEquation} ${secondParameter}`}
         </Text>
         <Text style={[styles.number, fontSize && { fontSize: fontSize }]}>
           = {result}

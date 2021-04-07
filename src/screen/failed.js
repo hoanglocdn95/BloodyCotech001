@@ -30,8 +30,8 @@ import {
   TestIds,
 } from '@react-native-firebase/admob';
 
-const adUnitId = TestIds.INTERSTITIAL;
-// const adUnitId = AppID.interstitial.FAILED_SCREEN.id;
+// const adUnitId = TestIds.INTERSTITIAL;
+const adUnitId = AppID.interstitial.FAILED_SCREEN.id;
 
 const interstitialAd = InterstitialAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
