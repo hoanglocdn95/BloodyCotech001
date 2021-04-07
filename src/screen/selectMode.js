@@ -15,6 +15,7 @@ import { StackRoute } from 'constants/route';
 import { BattleIcon, PracticeIcon } from 'assets/icons/index';
 import { useTranslation } from 'react-i18next';
 import PracticeStore from 'stores/practiceStore';
+import BattleStore from 'stores/battleStore';
 import rewardStore from 'stores/rewardStore';
 
 const SelectModeScreen = observer(() => {
@@ -25,7 +26,7 @@ const SelectModeScreen = observer(() => {
     IsMultiAvailable,
     IsDivideAvailable,
   } = rewardStore;
-  const chooseOperator = [
+  const operatorArr = [
     {
       type: TypeEquation.ADDITION,
       description: t('operator.addition'),
@@ -44,8 +45,13 @@ const SelectModeScreen = observer(() => {
     },
   ];
 
+  const chooseOperator = type => {
+    PracticeStore.setOperator(type);
+    BattleStore.setOperator(type);
+  };
+
   const renderListCheckbox = () => {
-    return chooseOperator.map((item, index) => {
+    return operatorArr.map((item, index) => {
       if (item.type === '') {
         return null;
       }
@@ -53,7 +59,7 @@ const SelectModeScreen = observer(() => {
         <TouchableHighlight
           key={`${item.type}_${index}`}
           style={styles.buttonCalculation}
-          onPress={() => PracticeStore.setOperator(item.type)}>
+          onPress={() => chooseOperator(item.type)}>
           <Text
             style={[
               styles.buttonText,
@@ -105,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: colors.bg_primary,
-    paddingTop: '20%',
+    paddingTop: '8%',
   },
   styleTitle: {
     textTransform: 'uppercase',

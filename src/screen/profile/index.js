@@ -26,8 +26,8 @@ import DeviceInfo from 'react-native-device-info';
 import { CalculationKey } from 'constants/common';
 import { TypePopup } from 'constants/common';
 
-// const adRewardId = TestIds.REWARDED;
-const adRewardId = AppID.interstitial.REWARD_1.id;
+const adRewardId = TestIds.REWARDED;
+// const adRewardId = AppID.interstitial.REWARD_1.id;
 
 const rewardedAd = RewardedAd.createForAdRequest(adRewardId, {
   requestNonPersonalizedAdsOnly: true,
@@ -45,19 +45,19 @@ const ProfileScreen = observer(() => {
   const modeList = [
     {
       isUnlock: IsSubtractAvailable,
-      label: t('operator.subtraction'),
+      label: t('settings.profile.subtraction'),
       keyName: CalculationKey.SUBTRACTION,
       price: 50,
     },
     {
       isUnlock: IsMultiAvailable,
-      label: t('operator.multiplication'),
+      label: t('settings.profile.multiplication'),
       keyName: CalculationKey.MULTIPLICATION,
       price: 100,
     },
     {
       isUnlock: IsDivideAvailable,
-      label: t('operator.division'),
+      label: t('settings.profile.division'),
       keyName: CalculationKey.DIVISION,
       price: 100,
     },
@@ -95,10 +95,15 @@ const ProfileScreen = observer(() => {
   const handleUnlockMode = (mode, price) => {
     if (rewardStore.MineCoin >= price) {
       rewardStore.unlockMode(mode);
+      rewardStore.setMineCoin(0 - price);
+      PopupStore.togglePopup(true, {
+        type: TypePopup.NOTICE,
+        content: t('settings.profile.unlockSuccess'),
+      });
     } else {
       PopupStore.togglePopup(true, {
         type: TypePopup.NOTICE,
-        content: t('component.pointSection.resetOut'),
+        content: t('settings.profile.notEnoughCoins'),
       });
     }
   };
@@ -113,7 +118,13 @@ const ProfileScreen = observer(() => {
           key={`${item.type}_${index}`}
           style={styles.buttonCalculation}
           onPress={() => handleUnlockMode(item.keyName, item.price)}>
-          <Text style={styles.label}>{item.label}</Text>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.label}>{`${item.label}: `}</Text>
+            <Text style={[styles.label, { color: colors.white }]}>
+              {item.price}
+            </Text>
+            <Image source={CoinsWhite} style={styles.imgCoins} />
+          </View>
         </TouchableOpacity>
       );
     });
@@ -192,20 +203,25 @@ const styles = StyleSheet.create({
     width: spaces.space6,
   },
   buttonCalculation: {
-    width: spaces.buttonOperator,
+    width: '90%',
     marginTop: spaces.space2,
-    backgroundColor: colors.white,
     borderRadius: borderRadius.header,
+    borderWidth: spaces.space0 / 2,
+    borderColor: colors.white,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   label: {
     textTransform: 'uppercase',
     color: colors.text,
-    fontSize: fonts.medium,
+    fontSize: fonts.normal,
     textAlign: 'center',
     fontWeight: 'bold',
     flexWrap: 'nowrap',
     paddingVertical: spaces.space1,
-    paddingHorizontal: spaces.space3,
     borderRadius: borderRadius.header,
   },
 });

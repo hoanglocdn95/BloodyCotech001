@@ -54,6 +54,10 @@ class BattleStore {
     this[`player${player}`].point = point;
   }
 
+  @action setOperator(operator) {
+    this.operator = operator;
+  }
+
   @action reset() {
     this.firstParameter = 0;
     this.secondParameter = 0;

@@ -20,6 +20,7 @@ import { PlayIcon } from 'assets/icons/index';
 import { StackRoute } from 'constants/route';
 import BattleStore from 'stores/battleStore';
 import LoadingStore from 'stores/loadingStore';
+import rewardStore from 'stores/rewardStore';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -29,8 +30,8 @@ import {
 } from '@react-native-firebase/admob';
 import AppID from 'constants/admob';
 
-const adUnitId = AppID.interstitial.SUCCESS_SCREEN.id;
-// const adUnitId = TestIds.INTERSTITIAL;
+const adUnitId = TestIds.INTERSTITIAL;
+// const adUnitId = AppID.interstitial.SUCCESS_SCREEN.id;
 
 const interstitialAd = InterstitialAd.createForAdRequest(adUnitId, {
   requestNonPersonalizedAdsOnly: true,
@@ -74,6 +75,7 @@ export default function SuccessScreen() {
 
   const navigateToWelcome = () => {
     BattleStore.reset();
+    rewardStore.setMineCoin(1);
     Navigate.navigate(StackRoute.Main.Welcome);
   };
 
