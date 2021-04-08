@@ -2,17 +2,20 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 import {
-  TouchableHighlight,
   StyleSheet,
   View,
   Text,
   Button,
+  Image,
+  TouchableOpacity,
 } from 'react-native';
 
+import { CoinsWhite } from 'assets/icons/index';
 import { colors, fonts, spaces, borderRadius } from 'constants/theme';
 import { useTranslation } from 'react-i18next';
 import AppID from 'constants/admob';
 import rewardStore from 'stores/rewardStore';
+import PopupStore from 'stores/popupStore';
 
 import {
   RewardedAd,
@@ -20,9 +23,11 @@ import {
   TestIds,
 } from '@react-native-firebase/admob';
 import DeviceInfo from 'react-native-device-info';
+import { CalculationKey } from 'constants/common';
+import { TypePopup } from 'constants/common';
 
-// const adRewardId = TestIds.REWARDED;
-const adRewardId = AppID.interstitial.REWARD_1.id;
+const adRewardId = TestIds.REWARDED;
+// const adRewardId = AppID.interstitial.REWARD_1.id;
 
 const rewardedAd = RewardedAd.createForAdRequest(adRewardId, {
   requestNonPersonalizedAdsOnly: true,
@@ -32,6 +37,31 @@ const rewardedAd = RewardedAd.createForAdRequest(adRewardId, {
 const ProfileScreen = observer(() => {
   const { t } = useTranslation();
   const [isLoadAdMod, setLoadAdMob] = useState(false);
+  const {
+    IsSubtractAvailable,
+    IsMultiAvailable,
+    IsDivideAvailable,
+  } = rewardStore;
+  const modeList = [
+    {
+      isUnlock: IsSubtractAvailable,
+      label: t('settings.profile.subtraction'),
+      keyName: CalculationKey.SUBTRACTION,
+      price: 50,
+    },
+    {
+      isUnlock: IsMultiAvailable,
+      label: t('settings.profile.multiplication'),
+      keyName: CalculationKey.MULTIPLICATION,
+      price: 100,
+    },
+    {
+      isUnlock: IsDivideAvailable,
+      label: t('settings.profile.division'),
+      keyName: CalculationKey.DIVISION,
+      price: 100,
+    },
+  ];
 
   useEffect(() => {
     const eventListener = rewardedAd.onAdEvent((type, error, reward) => {
@@ -62,9 +92,54 @@ const ProfileScreen = observer(() => {
     }
   };
 
+  const handleUnlockMode = (mode, price) => {
+    if (rewardStore.MineCoin >= price) {
+      rewardStore.unlockMode(mode);
+      rewardStore.setMineCoin(0 - price);
+      PopupStore.togglePopup(true, {
+        type: TypePopup.NOTICE,
+        content: t('settings.profile.unlockSuccess'),
+      });
+    } else {
+      PopupStore.togglePopup(true, {
+        type: TypePopup.NOTICE,
+        content: t('settings.profile.notEnoughCoins'),
+      });
+    }
+  };
+
+  const renderUnlockMode = () => {
+    return modeList.map((item, index) => {
+      if (item.isUnlock) {
+        return null;
+      }
+      return (
+        <TouchableOpacity
+          key={`${item.type}_${index}`}
+          style={styles.buttonCalculation}
+          onPress={() => handleUnlockMode(item.keyName, item.price)}>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.label}>{`${item.label}: `}</Text>
+            <Text style={[styles.label, { color: colors.white }]}>
+              {item.price}
+            </Text>
+            <Image source={CoinsWhite} style={styles.imgCoins} />
+          </View>
+        </TouchableOpacity>
+      );
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.styleTitle}>{t('settings.profile.title')}</Text>
+      <View style={styles.containerCoins}>
+        <Text style={styles.textCoins}>
+          {t('settings.profile.amountCoins')}
+        </Text>
+        <Text style={styles.textCoins}>{rewardStore.MineCoin}</Text>
+        <Image source={CoinsWhite} style={styles.imgCoins} />
+      </View>
       <Text style={styles.description}>
         {t('settings.profile.suggestSaveCoin')}
       </Text>
@@ -74,6 +149,7 @@ const ProfileScreen = observer(() => {
         onPress={() => showReward()}
         title={t('settings.profile.saveCoinButton')}
       />
+      {renderUnlockMode()}
     </View>
   );
 });
@@ -106,5 +182,46 @@ const styles = StyleSheet.create({
   buttonSaveCoin: {
     borderRadius: borderRadius.medium,
     height: spaces.space7,
+  },
+  containerCoins: {
+    flexDirection: 'row',
+    borderRadius: borderRadius.medium,
+    paddingVertical: spaces.space0,
+    paddingHorizontal: spaces.space3,
+    borderWidth: spaces.space0,
+    borderColor: colors.white,
+    marginTop: spaces.space1,
+  },
+  textCoins: {
+    fontSize: fonts.larger,
+    color: colors.white,
+    fontWeight: 'bold',
+  },
+  imgCoins: {
+    marginLeft: spaces.space0,
+    height: spaces.space6,
+    width: spaces.space6,
+  },
+  buttonCalculation: {
+    width: '90%',
+    marginTop: spaces.space2,
+    borderRadius: borderRadius.header,
+    borderWidth: spaces.space0 / 2,
+    borderColor: colors.white,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  label: {
+    textTransform: 'uppercase',
+    color: colors.text,
+    fontSize: fonts.normal,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    flexWrap: 'nowrap',
+    paddingVertical: spaces.space1,
+    borderRadius: borderRadius.header,
   },
 });

@@ -48,7 +48,12 @@ export default function WelcomeScreen() {
           {t('welcome.title2')}
         </Text>
       </View>
-      <WorkingSection firstParameter={1} secondParameter={1} result={3} />
+      <WorkingSection
+        firstParameter={1}
+        secondParameter={1}
+        result={3}
+        operator="+"
+      />
       <LottieView
         ref={animation => {
           this.animation = animation;

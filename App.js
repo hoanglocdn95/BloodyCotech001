@@ -14,6 +14,7 @@ export default function App() {
   React.useEffect(() => {
     ReqConfigAdmob();
     rewardStore.getCoinLocalStorage();
+    rewardStore.getModeLocalStorage();
   }, []);
 
   return (

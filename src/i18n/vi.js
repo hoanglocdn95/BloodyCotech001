@@ -7,6 +7,7 @@ const VietNam = {
     chooseMode: 'Chọn chế độ bạn muốn',
     practice: 'Thực hành',
     battle: 'So tài',
+    chooseOperator: 'Chọn phép tính bạn muốn',
   },
   chooseTime: {
     chooseYourTime: 'Chọn thời gian chơi',
@@ -29,9 +30,18 @@ const VietNam = {
     },
     profile: {
       title: 'Hồ sơ',
+      amountCoins: 'Xu của bạn: ',
       suggestSaveCoin:
-        'Nhấn vào nút "Nâng nhặt chặt bị", bạn có thể tích trữ thêm các đồng xu để có thể reset lại phép tính khó trong chế độ thưc hành hoặc dành cho việc mở các tính năng mới trong tương lai',
+        'Nhấn vào nút "Nâng nhặt chặt bị", bạn có thể tích trữ thêm các đồng xu để có thể thay đổi lại phép tính khó trong' +
+        ' chế độ thưc hành hoặc dành cho việc mở các tính năng mới trong tương lai.' +
+        ' Hoặc nhận 1 xu cho mỗi lần hoàn thành màn chơi thực hành và so tài.',
       saveCoinButton: 'Nâng nhặt chặt bị',
+      subtraction: 'Mở khỏa toán trừ',
+      multiplication: 'Mở khỏa toán nhân',
+      division: 'Mở khỏa toán chia',
+      notEnoughCoins:
+        'Bạn chưa đủ xu để mở khóa chức năng này, hãy kiếm xu nhiều hơn để mở khóa!',
+      unlockSuccess: 'Bạn đã mở khóa chức năng thành công!',
     },
   },
   arrPlayTime: {
@@ -41,6 +51,12 @@ const VietNam = {
     highJunior: 'Phổ thông',
     adult: '18+',
     easyGame: 'Game là dễ',
+  },
+  operator: {
+    addition: 'Phép Cộng (+)',
+    subtraction: 'Phép Trừ (-)',
+    multiplication: 'Phép Nhân (x)',
+    division: 'Phép Chia (:)',
   },
   component: {
     pointSection: {

@@ -39,9 +39,7 @@ const PointSection = props => {
     }
     return (
       <TouchableOpacity
-        onPress={
-          rewardStore.MineCoin === 0 ? () => {} : () => handleButtonReset()
-        }
+        onPress={() => handleButtonReset()}
         style={styles.reset}>
         <Image source={ResetIcon} style={[styles.icon, styles.resetIcon]} />
         <Text style={styles.resetTime}>

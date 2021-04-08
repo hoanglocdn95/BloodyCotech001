@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 
 import { colors, fonts } from 'constants/theme';
@@ -14,39 +14,31 @@ import BattleStore from 'stores/battleStore';
 
 const windowWidth = Dimensions.get('window').width;
 
+const LosePoint = -5;
+const WinPoint = 10;
+
 const BattleScreen = observer(() => {
   const Navigate = useNavigation();
-  const [result, setResult] = useState(BattleStore.calculateResult());
-
-  function randomNumber(to, from) {
-    return Math.floor(Math.random() * from) + to;
-  }
 
   useEffect(() => {
-    BattleStore.setFirstParameter(randomNumber(1, 9));
-    BattleStore.setSecondParameter(randomNumber(1, 9));
-    setResult(BattleStore.calculateResult());
+    BattleStore.getValue();
   }, []);
 
   function pressAnswer(type, player) {
-    const isTrue =
-      BattleStore.FirstParameter + BattleStore.SecondParameter === result;
-    BattleStore.setFirstParameter(randomNumber(1, 9));
-    BattleStore.setSecondParameter(randomNumber(1, 9));
-    setResult(BattleStore.calculateResult());
-    if ((type === Wrong && isTrue) || (type === Right && !isTrue)) {
+    if (type !== BattleStore.TrueAnswer) {
       const point = BattleStore[`player${player}`].point - 1;
       BattleStore.setPoint(point, player);
-      if (point <= -5) {
+      if (point <= LosePoint) {
         return Navigate.navigate(StackRoute.Main.Success);
       }
-    }
-    if ((type === Wrong && !isTrue) || (type === Right && isTrue)) {
+      BattleStore.getValue();
+    } else {
       const point = BattleStore[`player${player}`].point + 1;
       BattleStore.setPoint(point, player);
-      if (point >= 10) {
+      if (point >= WinPoint) {
         return Navigate.navigate(StackRoute.Main.Success);
       }
+      BattleStore.getValue();
     }
   }
 
@@ -58,8 +50,9 @@ const BattleScreen = observer(() => {
           <WorkingSection
             firstParameter={BattleStore.FirstParameter}
             secondParameter={BattleStore.SecondParameter}
-            result={result}
+            result={BattleStore.ResultParameter}
             fontSize={fonts.header3}
+            operator={BattleStore.Operator}
           />
         </View>
         <AnswerButton
@@ -73,8 +66,9 @@ const BattleScreen = observer(() => {
           <WorkingSection
             firstParameter={BattleStore.FirstParameter}
             secondParameter={BattleStore.SecondParameter}
-            result={result}
+            result={BattleStore.ResultParameter}
             fontSize={fonts.header3a}
+            operator={BattleStore.Operator}
           />
         </View>
         <AnswerButton
